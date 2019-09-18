@@ -1,0 +1,11 @@
+//save page source
+Press "Ctrl+S"
+Wait "2s"
+Press "Ctrl+Right"
+Press "Ctrl+A"
+Press "Delete"
+
+Var _SERVER_CLIPBOARD_CONTENT="{_PROJECT_DIR}\html_file\{name_html_file}"
+Press "Ctrl+V"
+Wait "2s"
+Press "Enter"

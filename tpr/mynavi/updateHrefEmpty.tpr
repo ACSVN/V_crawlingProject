@@ -1,0 +1,43 @@
+Var index_row_empty=""
+Var href_empty=""
+Var rank=""
+Var found_image=0
+
+// Open the CSV file
+File "open" file="..\..\result\href_empty.csv" id="id2"
+// Iterate over the file lines
+for (ln=2; {ln}<{_FILE_LINE_COUNT}+1; ln={ln}+1) {
+    // Parse the current line into comma separated values
+    File parse line={ln} id="id2"
+    Var index_row_empty={_FILE_PARSE_VALUE2}
+    Var href_empty={_FILE_PARSE_VALUE3}
+    Var rank={_FILE_PARSE_VALUE4}
+    Press "Windows+R"
+    Paste "firefox"
+    Press "Enter"
+    Wait "1s"
+    Paste {href_empty}
+    Wait "5s"
+    Press "Enter"
+
+    Var name_html_file="url_empty"
+    Run "..\..\src\mynavi\DeleteFileExist.java"
+    Wait "2s"
+    Run "savepagesource.tpr"
+    Wait "2s"
+    for (i=0; {i}<100; i={i}+1) {
+        Compareto "completed_firefox.PNG" passrate="70" method="search2"
+        if({_EXIT_CODE} > 0){
+            Wait "1s"
+        }else{
+            Var found_image=1
+            break
+        }
+    }
+    if({found_image}==1){
+        Run "..\..\src\mynavi\UpdateDataContent.java"
+        Wait "5s"
+        Log {check_status}
+        Press "Ctrl+Shift+W"
+    }
+}

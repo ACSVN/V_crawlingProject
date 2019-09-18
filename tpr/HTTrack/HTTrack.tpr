@@ -1,0 +1,220 @@
+Log "HTTrack.tpr start"
+Var dir={_PROJECT_DIR}
+Var _CURDATE_FORMAT="yyMMddHHmm"
+Var filename="{_CURDATE}"
+//HTTrackにて作業を行う前に、作業開始時間を抑えておく
+Var _CURDATE_FORMAT="yyyy-MM-dd"
+Var timeA="{_CURDATE}"
+Var _CURDATE_FORMAT="HH:mm:ss"
+Var timeB="{_CURDATE}"
+Var maketime="{timeA}T{timeB}+09:00"
+
+//worktime.txtを作成
+Press Windows+r wait=1s
+Paste "cmd" wait=1s
+Press Enter wait=1s
+
+Paste "cd {dir}\result\ " wait=1s
+Press Enter wait=1s
+
+Paste "echo {maketime} > worktime.txt" wait=1s
+Press Enter wait=1s
+//worktime.txtを作成、ここまで
+
+Paste "exit" wait=1s
+Press Enter wait=1s
+
+//テスト
+//var web_site="mynavi"
+java {
+
+    import java.io.BufferedReader;
+    import java.io.File;
+    import java.io.FileNotFoundException;
+    import java.io.FileReader;
+    import java.io.IOException;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+    import java.io.FileWriter;
+    import java.io.BufferedWriter;
+    import java.io.PrintWriter;
+
+    String dirname = getVariableAsString("dir");  // ディレクトリ名(相対パスから逃げ)
+    String web_site = getVariableAsString("web_site");  // ディレクトリ名(相対パスから逃げ)
+    getContext().setVariable("check_detail", web_site);
+    //特に指定が無い場合は、hreflist.csvからデータを参照する
+    String filename = dirname + "\\result\\hreflist.csv";    // 入力ファイル名
+    //dodaの場合は、doda.csvからリストを拝借する
+    //190903kodama"Doda"から"doda"に変更
+    if(web_site.equals("doda")){
+        filename = dirname + "\\result\\doda.csv";
+    //
+    }else if(web_site.equals("rikunabi")){
+        filename = dirname + "\\result\\rikunabi.csv";
+    }
+    String outputname = dirname + "\\result\\hreflist.txt";  // 出力ファイル名
+
+    try {
+        BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(outputname)));
+
+        String line = "";
+        boolean first = true;
+
+        while ((line = br.readLine()) != null) {
+            String array[] = line.split(",");  // カンマごとに分ける
+            if (first) {
+                first = false;  // 最初の行だけこっちの処理(出力なし)
+            } else {
+                pw.println(array[0]);  // コピーしたい行のみ出力
+            }
+        }
+        br.close();
+        pw.close();
+
+    } catch (FileNotFoundException e) {
+        getContext().setVariable("check_detail", "99");
+    } catch (IOException e) {
+        getContext().setVariable("check_detail", "999");
+    }
+
+} endjava
+
+Var waittime="0.5s"
+
+Press "Windows+r"
+Paste "C:\Program Files\WinHTTrack\WinHTTrack.exe"
+Press "Enter"
+
+
+
+Click "image" timeout="5m" template="HTTrack\top"
+
+Press "Ctrl+n" wait="{waittime}"
+//190903kodama,Paste対象を{filename}から{web_site}に変更
+Paste "{web_site}" wait="{waittime}"
+//Paste "{filename}" wait="{waittime}"
+//190903kodama,変更ここまで
+Press "TAB" wait="{waittime}" count="2"
+//Paste "{_ENV_USERPROFILE}\Desktop\HTTrackLog" wait="{waittime}"
+Paste "C:\HTTrackLog" wait="{waittime}"
+Press "TAB" wait="{waittime}" count="2"
+Press "Ctrl+n" wait="{waittime}"
+Press "TAB" wait="{waittime}"
+Press "LEFT" wait="{waittime}" count="6"
+Press "TAB" wait="{waittime}" count="2"
+Paste "{_PROJECT_DIR}\result\hreflist.txt" wait="{waittime}"
+Press "TAB" wait="{waittime}" count="2"
+Press "Enter"
+Press "Shift+TAB"
+Press "RIGHT" wait="{waittime}"
+Press "TAB" wait="{waittime}" count="4"
+Paste "+*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar" wait="{waittime}"
+Press "TAB" wait="{waittime}" count="3"
+Press "Enter"
+Press "TAB" wait="{waittime}" count="2"
+Press "Enter"
+//反対のほうが早かったので
+Press "Shift+TAB" count="3"
+Press "Enter"
+
+for (; 0 == 0; ) {
+    Compareto "HTTrack\complate" method="search2"
+    Waitfor "match" method="search2" template="HTTrack\complate" timeout="1h"
+   if({_EXIT_CODE} ==0){
+       break
+   }
+   
+}
+//Press "TAB" wait="{waittime}" count="1"
+//Press "Enter"
+Wait "3s"
+Click "image" template="HTTrack\HTTrackComplete"
+Wait "3s"
+
+//テスト用
+//Var web_site="Doda"
+//Var filename="1907242055"
+//Var filename="1907250351"
+
+//190903kodama rename_batch処理をスキップ、またS3upload.tprに接続するよう変更
+Run "..\S3\S3upload.tpr" web_site="{web_site}"
+
+
+////HTTrackの動作完了確認後、取得したhtmlのリネーム処理を行います。
+////dodaの場合
+////190903kodama "Doda"から"doda"に変更
+//   if({web_site}=="doda"){
+////コマンドプロンプトを立ち上げる
+//   Press "Windows+r"
+//   Paste "cmd"
+//   Press "Enter"
+//   //コマンドプロンプトが立ち上がるまで待機
+//   Compareto "HTTrack\cmd_start" method="search2"
+//
+//   //doda_rename.batをコピー
+////   Paste "copy /Y {_PROJECT_DIR}\batch_file\doda_rename.bat {_ENV_USERPROFILE}\Desktop\HTTrackLog\{filename}\doda.jp\DodaFront\View\JobSearchDetail\doda_rename.bat"
+//   Paste "copy /Y {_PROJECT_DIR}\batch_file\doda_rename.bat C:\HTTrackLog\{filename}\doda.jp\DodaFront\View\JobSearchDetail\doda_rename.bat"
+//   Wait 1s
+//   Press "Enter"
+//   Wait 2s
+//
+   //
+////   Paste "cd {_ENV_USERPROFILE}\Desktop\HTTrackLog\{filename}\doda.jp\DodaFront\View\JobSearchDetail"
+//   Paste "cd C:\HTTrackLog\{filename}\doda.jp\DodaFront\View\JobSearchDetail"
+//   Wait 1s
+//   Press "Enter"
+//   Paste "doda_rename.bat"
+//   Wait 1s
+//   Press "Enter"
+//
+   //
+//   Waitfor "mismatch" passrate="76" method="search2" template="HTTrack\cmd_dodabatch"
+//
+//   Wait 2s
+//   Paste "exit"
+//   Wait 1s
+//   Press "Enter"
+//   Wait 1s
+   //
+// //mynaviの場合
+//}else if({web_site}=="mynavi"){
+//    //コマンドプロンプトを立ち上げる
+//   Press "Windows+r"
+//   Paste "cmd"
+//   Press "Enter"
+//   //コマンドプロンプトが立ち上がるまで待機
+//   Compareto "HTTrack\cmd_start" method="search2"
+//
+//   //mynavi_rename.batをコピー
+////   Paste "copy /Y {_PROJECT_DIR}\batch_file\mynavi_rename.bat {_ENV_USERPROFILE}\Desktop\HTTrackLog\{filename}\tenshoku.mynavi.jp\mynavi_rename.bat"
+//   Paste "copy /Y {_PROJECT_DIR}\batch_file\mynavi_rename.bat C:\HTTrackLog\{filename}\tenshoku.mynavi.jp\mynavi_rename.bat"
+//   Wait 1s
+//   Press "Enter"
+//   Wait 2s
+//
+   //
+////   Paste "cd {_ENV_USERPROFILE}\Desktop\HTTrackLog\{filename}\tenshoku.mynavi.jp"
+//   Paste "cd C:\HTTrackLog\{filename}\tenshoku.mynavi.jp"
+//   Wait 1s
+//   Press "Enter"
+//   Paste "mynavi_rename.bat"
+//   Wait 1s
+//   Press "Enter"
+//
+   //
+//   Waitfor "mismatch" passrate="76" method="search2" template="HTTrack\cmd_mynavibatch"
+//
+//   Wait 2s
+//   Paste "exit"
+//   Wait 1s
+//   Press "Enter"
+//   Wait 1s
+//}
+//
+//
+////HTTrackUploadで、gdriveを用いたGoogleDriveへのアップロードに移行します。
+//Run "HTTrackUpload.tpr" web_site="{web_site}"
+
+

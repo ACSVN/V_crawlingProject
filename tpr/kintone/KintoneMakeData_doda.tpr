@@ -1,0 +1,272 @@
+// This script was made by kodama,Nose 190725
+// このスクリプトでは、kintoneにアップロードするためのcsvデータを整形していきます。
+
+
+// コマンドプロンプト立上げの関数
+Procedure cmdOpen {
+    Press "Windows+r"
+    Wait 2s
+    Paste "cmd"
+    Press "Enter"
+    Compareto "kintone\cmd_start" method="search2"
+    Wait 1s
+}
+
+// コマンドプロンプト操作の関数
+Procedure cmdOperation {
+  Paste {1}
+  Wait 1s
+  Press "Enter"
+}
+
+
+// テスト用(doda)
+Var web_site="doda"
+//Var filename="1907242055"
+//Var maketime="2019-07-24T00:00:00+09:00"
+Var projectdir={_PROJECT_DIR}
+
+//maketimeを取得
+File "open" file="..\..\result\worktime.txt" id="work"
+File "read" line="1" id="work"
+Var maketime={_FILE_READ}
+String "substring" "{_FILE_READ}" var="maketime" start="0" end="25"
+File "close" save="false" id="work"
+//maketimeの取得ここまで
+
+// projectdirを取得
+File "open" file="..\..\result\directory.txt" id="dir"
+File "read" line="1" id="dir"
+Var project_dir={_FILE_READ}
+//String "substring" "{_FILE_READ}" var="maketime" start="0" end="25"
+File "close" save="false" id="dir"
+// projectdirの取得ここまで
+
+Log {project_dir}
+
+// gdrive.exeを用いて、アップロード対象フォルダのフォルダIDを取得
+cmdOpen
+cmdOperation "c:\gdrive\gdrive.exe list -m 100000 -q \"name contains '.html' and name contains '30' and createdTime >= '{maketime}' and not name contains 'index' \" > {projectdir}\result\ID_Name.txt"
+
+//消滅するまで待つ
+for (; 0 == 0; ) {
+   //コマンドプロンプトのメニューアイコンが消滅するまで待つ
+   Waitfor "mismatch" passrate="80" method="search2" template="kintone\cmd_listgetwait" timeout="10h"
+  Compareto "kintone\cmd_listgetwait" method="search2"
+  if ({_EXIT_CODE} > 0) {
+      break
+  }
+}
+
+Run "{_PROJECT_DIR}\tpr\kintone\KintoneMakeWait.tpr"
+cmdOperation "exit"
+Wait 1s
+
+//190824 ここから開始すると、ID_NAME.csvが作られる
+
+// kintoneに表示するhtmlダウンロード用URLの作成
+java {
+    import java.io.*;
+
+    String projectdir_tpr = getVariableAsString("_PROJECT_DIR") + "\\result\\";  // VP_WebCrawlフォルダのディレクトリ(相対パスエラーから逃げ)
+    //String projectdir_tpr = "..\\result\\";  // VP_WebCrawlフォルダのディレクトリ(相対パスエラーから逃げ)
+    getContext().setVariable("check_detail2",projectdir_tpr );
+    String website_tpr = getVariableAsString("web_site");                      // いろんなサイトで使いまわせるようにしてます
+    //getContext().setVariable("check_detail2",website_tpr );
+        String ip_Gsuite_txt = projectdir_tpr + "ID_Name.txt";                     // 入力ファイル名(input)
+    String op_Gsuite_csv = projectdir_tpr + "ID_Name.csv";                     // 出力ファイル名(output)
+    int httpcount;                                                             // 文字列調整用
+    
+    try {
+        // gdrive.exeからとったID(URLに加工する)とhtmlNameを出力
+        BufferedReader br_Gsuite_txt = new BufferedReader(new FileReader(new File(ip_Gsuite_txt)));
+        String line = "";
+        boolean first = true;
+        File file = new File(op_Gsuite_csv);
+        int cnt=0;
+        FileWriter filewriter;
+        
+        while ((line = br_Gsuite_txt.readLine()) != null) {
+            if(first){
+              filewriter = new FileWriter(file);
+            }
+            else{
+                filewriter = new FileWriter(file,true);
+            }
+            PrintWriter pw_Gsuite_csv = new PrintWriter(filewriter);
+
+            cnt=cnt+1;
+            String array[] = line.split("\\s+");  // 空白ごとに分ける(txtなので)
+            if (first) {
+                first = false;
+            } else {
+                pw_Gsuite_csv.print("https://drive.google.com/uc?id=" + array[0] + "&export=download");  // htmlDownloadURL
+                pw_Gsuite_csv.print(",");
+                pw_Gsuite_csv.println(array[1]);  // htmlName
+            }
+            pw_Gsuite_csv.close();
+            getContext().setVariable("check_detail1",cnt );
+            }
+        br_Gsuite_txt.close();
+    } catch (FileNotFoundException e) {
+        getContext().setVariable("check_detail1","err2" );
+    } catch (IOException e) {
+        getContext().setVariable("check_detail1","err1" );
+    }
+}endjava
+
+Log {check_detail1}
+Log {check_detail2}
+
+//Log "torima"
+
+Wait 5s
+Run "{_PROJECT_DIR}\tpr\kintone\KintoneMakeWait.tpr"
+cmdOperation "exit"
+Wait 1s
+
+
+java {
+    import java.io.*;
+
+    String projectdir_tpr = getVariableAsString("_PROJECT_DIR") + "\\result\\";  // VP_WebCrawlフォルダのディレクトリ(相対パスエラーから逃げ)
+    String website_tpr = getVariableAsString("web_site");                      // いろんなサイトで使いまわせるようにしてます
+//    String ip_Gsuite_txt = projectdir_tpr + "ID_Name.txt";                     // 入力ファイル名(input)
+//    String op_Gsuite_csv = projectdir_tpr + "ID_Name.csv";                     // 出力ファイル名(output)
+    String ip_URL_csv = projectdir_tpr + website_tpr + ".csv";                 // ウェブサイトURLからhtml名(key)を取得するためのやつ
+    String op_URL_csv = projectdir_tpr + website_tpr + "_output.csv";          // それを貼り付けるためのやつ
+    int httpcount;                                                             // 文字列調整用
+    
+    try {
+        // doda.csvファイルのURLからhtmlNameを取得して出力
+        BufferedReader br_URL_csv = new BufferedReader(new FileReader(new File(ip_URL_csv)));
+        PrintWriter pw_URL_csv = new PrintWriter(new BufferedWriter(new FileWriter(op_URL_csv)));
+        boolean first = true;
+        String line = "";
+        while ((line = br_URL_csv.readLine()) != null) {
+            String array[] = line.split(",");  // カンマごとに分ける(csvなので)
+            if (first) {
+                first = false;
+            } else {
+                String id[] = array[0].split("/");  // カンマで分けたA列のURLをさらに"/"で分けて分解する
+                String gsuiteID = id[6].replace("j_jid__", "");
+                httpcount = array[0].indexOf("http");
+                if(httpcount != -1){
+                    pw_URL_csv.print(array[0].substring(httpcount));
+                }
+                pw_URL_csv.print(",");
+                pw_URL_csv.println(gsuiteID + ".html");
+            }
+        }
+        br_URL_csv.close();
+        pw_URL_csv.close();
+    } catch (FileNotFoundException e) {
+    } catch (IOException e) {
+    }
+} endjava
+//Run "{projectdir}\tpr\kintone\KintoneMakeWait.tpr"
+//cmdOperation "exit"
+//Wait 1s
+
+Log {check_detail1}
+Log {check_detail2}
+
+// SQLite3でデータベースに入れて、gdrive.exeからとったhtmlNameとdoda.csvのURLからとったURLを照合 → replace.csvにリスト出力
+cmdOpen
+cmdOperation "cd {projectdir}\result"
+cmdOperation "sqlite3 ID_Name.db"
+cmdOperation "DROP TABLE DataTable;"
+cmdOperation "DROP TABLE GsuiteTable;"
+cmdOperation "CREATE TABLE DataTable(URLtoWebAccess TEXT, htmlName TEXT);"
+cmdOperation "CREATE TABLE GsuiteTable(URLtoDownload TEXT, htmlName TEXT);"
+cmdOperation ".separator ,"
+cmdOperation ".import {web_site}_output.csv DataTable"
+cmdOperation ".separator ,"
+cmdOperation ".import ID_Name.csv GsuiteTable"
+
+// ここでreplaceファイル登場！！！！！
+cmdOperation ".output {web_site}_replace.csv"
+cmdOperation "SELECT DataTable.URLtoWebAccess, GsuiteTable.URLtoDownload FROM DataTable, GsuiteTable WHERE DataTable.htmlName = GsuiteTable.htmlName GROUP BY DataTable.URLtoWebAccess;"
+Wait 2s
+Run "{_PROJECT_DIR}\tpr\kintone\KintoneMakeWait.tpr"
+cmdOperation ".quit"
+cmdOperation "exit"
+
+// kintone.csvを作る
+java {
+    import java.io.*;
+
+    String projectdir_tpr = getVariableAsString("_PROJECT_DIR") + "\\result\\";
+    String website_tpr = getVariableAsString("web_site");
+    String original_csv = projectdir_tpr + website_tpr + ".csv";         // 元々のcsvファイル
+    String replace_csv = projectdir_tpr + website_tpr + "_replace.csv";  // URLを置き換えるためのやつ
+    String kintone_csv = projectdir_tpr + website_tpr + "_kintone.csv";  // kintoneに貼り付けるためのcsvファイル(このスクリプトの成果物！！)
+
+    try {
+        BufferedReader br_original_csv = new BufferedReader(new FileReader(new File(original_csv)));
+        FileWriter f;
+        PrintWriter pw_kintone_csv;
+        BufferedReader print_writer_csv = new BufferedReader(new FileReader(new File(original_csv)));
+
+        String line1 = "";
+        String line2 = "";
+        boolean first = true;
+
+        while ((line1 = br_original_csv.readLine()) != null){
+            BufferedReader br_replace_csv = new BufferedReader(new FileReader(new File(replace_csv)));
+            String original[] = line1.split(",");
+
+            if (first) {
+                //f = new FileWriter( kintone_csv, false);
+                //pw_kintone_csv = new PrintWriter(new BufferedWriter(f));
+                pw_kintone_csv = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(kintone_csv,false),"UTF-8")));
+
+                // オリジナルファイル(doda.csv)の目次を１行目に出力
+                for (int i = 0; i < original.length; i++) {
+                    if (i < original.length - 1) {
+                        pw_kintone_csv.print(original[i]);
+                        pw_kintone_csv.print(",");
+                    } else {
+                        pw_kintone_csv.println(original[i]);
+                    }
+                }
+                first = false;
+            } else {
+                // 2行目以降は1列目でURLの置き換え、2列目以降で元々のcsvデータを出力
+                //f = new FileWriter( kintone_csv, true);
+                //pw_kintone_csv = new PrintWriter(new BufferedWriter(f));
+                pw_kintone_csv = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(kintone_csv,true),"UTF-8")));
+                boolean find_flg=false;
+                while ((line2 = br_replace_csv.readLine()) != null && !find_flg) {
+                    String replace[] = line2.split(",");
+                    if(original[0].contains(replace[0])){
+                       find_flg=true;
+                       pw_kintone_csv.print(replace[1]);
+                   }
+               }
+                  if(!find_flg){
+                      pw_kintone_csv.print(original[0]);
+                  }
+                  pw_kintone_csv.print(",");
+                  for (int i = 1; i < original.length; i++) {
+                      if (i < original.length - 1) {
+                          pw_kintone_csv.print(original[i]);
+                          pw_kintone_csv.print(",");
+                        } else {
+                            pw_kintone_csv.println(original[i]);
+                       }
+                  }
+              br_replace_csv.close();
+            }
+            pw_kintone_csv.close() ;
+
+        }
+    } catch (FileNotFoundException e) {
+        getContext().setVariable("check_detail1","errNotFound" );
+    } catch (IOException e) {
+        getContext().setVariable("check_detail1","errIO" );
+    }
+} endjava
+Log {check_detail1}
+//Run "{_PROJECT_DIR}\tpr\kintone\KintoneMakeWait.tpr"
+Run "..\HBinput.tpr" web_site="doda"

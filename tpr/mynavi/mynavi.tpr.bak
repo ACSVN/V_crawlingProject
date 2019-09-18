@@ -1,0 +1,197 @@
+//Variable check status source code run
+Var check_status=""
+
+//directory.txtとweb_site.txtを作成
+Press Windows+r wait=1s
+Paste "cmd" wait=1s
+Press Enter wait=1s
+Paste "cd {_PROJECT_DIR}\result\ " wait=1s
+Press Enter wait=1s
+Paste "echo {_PROJECT_DIR}> directory.txt" wait=1s
+Press Enter wait=1s
+Paste "echo mynavi> web_site.txt" wait=1s
+Press Enter wait=1s
+Paste "exit" wait=1s
+Press Enter wait=1s
+//directry.txtの作成、ここまで
+
+
+//Define variable from csv file input
+Var web_name=""
+Var url=""
+Var class_href=""
+Var class_company=""
+Var class_title=""
+Var class_company_address=""
+Var class_company_recruiter=""
+Var class_company_phone=""
+Var class_info_job=""
+Var class_date_period=""
+Var class_industry=""
+Var class_caption=""
+Var class_total=""
+Var replace_nxt_p=""
+Var class_domain=""
+Var case_display=""
+Var total_click_search=""
+Var class_main_office=""
+Var class_remark=""
+
+//Define variable get content
+Var flag=0
+Var url_web=""
+Var number_pages=0
+Var page_item=0
+
+//Define variable save html page
+Var name_html_file=""
+Var path_url_page=""
+Var found_image=0
+
+//Define variable get href in html file
+Var path_href_file=""
+Var row_ind_href_empty=1
+
+// Open the CSV file
+//File "open" file="..\..\input_mynavi_new.csv" id="id1"
+File "open" file="{_PROJECT_DIR}\input_mynavi_new.csv" id="id1"
+
+
+
+// Iterate over the file lines
+for (line=2; {line}<={_FILE_LINE_COUNT}; line={line}+1) {
+    // Parse the current line into comma separated values
+    File parse line={line} id="id1"
+    Var web_name={_FILE_PARSE_VALUE1}
+    Var url={_FILE_PARSE_VALUE2}
+    Var class_href={_FILE_PARSE_VALUE3}
+    Var class_company={_FILE_PARSE_VALUE4}
+    Var class_title={_FILE_PARSE_VALUE5}
+    Var class_company_address={_FILE_PARSE_VALUE6}
+    Var class_company_recruiter={_FILE_PARSE_VALUE7}
+    Var class_company_phone={_FILE_PARSE_VALUE8}
+    Var class_info_job={_FILE_PARSE_VALUE9}
+    Var class_date_period={_FILE_PARSE_VALUE10}
+    Var class_industry={_FILE_PARSE_VALUE11}
+    Var class_caption={_FILE_PARSE_VALUE12}
+    Var class_total={_FILE_PARSE_VALUE13}
+    Var replace_nxt_p={_FILE_PARSE_VALUE14}
+    Var class_domain={_FILE_PARSE_VALUE15}
+    Var case_display={_FILE_PARSE_VALUE16}
+    Var total_click_search={_FILE_PARSE_VALUE17}
+    Var class_main_office={_FILE_PARSE_VALUE18}
+    Var class_remark={_FILE_PARSE_VALUE19}
+}
+//Log {class_caption}
+Log {class_href}
+
+Press Windows+r wait=1s
+Paste "chrome {url}"
+Press Enter wait=1s
+Press Windows+up
+Wait "3s"
+
+//Press "Ctrl+T"
+//Paste {url}
+//Press "Enter"
+//Wait "5s"
+
+for (i=0; {i}<{total_click_search}; i={i}+1) {
+    Log {i}
+    Var flag=0
+    for (i1=0; {i1}<1000&&{flag}<1; i1={i1}+1){
+        Compareto "image{i}" passrate="50" method="search2"
+        if({_EXIT_CODE} > 0){
+            Wait "1s"
+        }else{
+            Click "image" passrate="50" template="image{i}"
+            Var flag=1
+        }
+    }
+}
+Wait "1s"
+Press F6
+Wait "1s"
+Press "Ctrl+C"
+Wait "1s"
+Var url_web={_SERVER_CLIPBOARD_CONTENT_TEXT}
+Run "{_PROJECT_DIR}\src\mynavi\GetTotalPage.java"
+Log {number_pages}
+Wait "1s"
+
+Run "{_PROJECT_DIR}\src\mynavi\OutputFileCreate.java"
+Log {check_status}
+
+if({number_pages} > 1){
+   //for (j=1; {j}<={number_pages}; j={j}+1) {
+        for (j=1; {j}<=2; j={j}+1) {
+            Var fonud=0
+            Var page_item={j}
+            Run "{_PROJECT_DIR}\src\mynavi\GetUrlPage.java"
+            Log {path_url_page}
+            Press "Ctrl+T"
+            for ( k=0; {k}<=60 ; k={k}+1 ){
+                Compareto "load_check" method="search2" cmparea="x:0,y:0,w:150,h:150"
+               if({_EXIT_CODE} == 0){
+                  break
+               }
+               Wait "1s"
+            }
+            Paste {path_url_page}
+            Press "Enter"
+            Wait "5s"
+           
+            Var name_html_file="temp"
+            Run "{_PROJECT_DIR}\src\mynavi\DeleteFileExist.java"
+            Wait "2s"
+            Log {check_status}
+            Run "savepagesource.tpr"
+            Wait 2s
+            for (k=0; {k}<1000; k={k}+1) {
+                  Compareto "completed" passrate="50" method="search2"
+                  if({_EXIT_CODE} > 0){
+                        Wait "1s"
+                  }else{
+                        Var found_image=1
+                        break
+                  }
+            }
+            if({found_image}==1){
+                Var page_item={j}
+                Run "{_PROJECT_DIR}\src\mynavi\GetHref.java"
+                Log {check_status}
+                Click "image" passrate="70" template="close_list_download.PNG"
+                Press "Ctrl+W"
+                Var k=0
+            }
+      }
+}else{
+      Var name_html_file="temp"
+      Run "{_PROJECT_DIR}\src\mynavi\DeleteFileExist.java"
+      Log {check_status}
+      Run "savepagesource.tpr"
+      for (k=0; {k}<1000; k={k}+1) {
+            Compareto "completed" passrate="70" method="search2"
+            if({_EXIT_CODE} > 0){
+                  Wait "1s"
+            }else{
+                  break
+            }
+      }
+      Var page_item=1
+      Run "{_PROJECT_DIR}\src\mynavi\GetHref.java"
+      Log {check_status}
+      Wait "5s"
+}
+
+Press "Ctrl+Shift+W"
+
+File "close" save="false" id="id1"
+
+//Run "updateHrefEmpty.tpr"
+
+//Run "..\..\src\mynavi\DeleteFileExist.java"
+//Wait "2s"
+//Log {check_status}
+Var web_site="mynavi"
+Run "{_PROJECT_DIR}\tpr\HTTrack\HTTrack.tpr"

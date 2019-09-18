@@ -1,0 +1,62 @@
+//エントリポイント
+
+//設定で用いる変数の設定
+Var web_site=""
+Var new_or_all=""
+Var capture=""
+Var kintone_upload=""
+Var option_btn=""
+
+//1.メニューを呼び出し、Webクロール条件を選択します
+Run "..\src\scripts\SelectOrder.java"
+
+Log {web_site}
+Log {new_or_all}
+Log {capture}
+Log {kintone_upload}
+Log {option_btn}
+
+Wait 3s
+
+
+//■処理の分岐
+//2.指定された{web_site}に応じた処理を実行します
+//{web_site}でDodaが選択されている場合は、Dodaの処理を行う
+if({web_site}=="Doda"){
+
+      Log "doda_select"
+      Run "doda\DodaGetHreflist.tpr"
+      Run "doda\DodaGetCompanyInfo.tpr"
+      
+//{web_site}でMynaviが選択されている場合は、mynaviの処理を行う
+}else if({web_site}=="mynavi"){
+
+    Log "mynavi_select"
+      Run "mynavi\mynavi.tpr"
+
+//{web_site}でrikunabiが選択されている場合は、rikunabiの処理を行う
+}else if({web_site}=="rikunabi"){
+    
+    Log "rikunabi_select"
+      Run "rikunabi\rikunabi.tpr"
+}
+
+//3.キャプチャの取得有無に応じた処理を実行します
+if({caputure}=="有"){
+//{capture}で「有」が選択されている場合は、capture取得の処理を行う
+    if({web_site}=="doda" || {web_site}=="mynavi"){
+        //dodaあるいはマイナビの場合、HTTrackの動作に移行する
+        Run "HTTrack\HTTrack.tpr"        
+    }else if({web_site}=="rikunabi"){
+        //rikunabiが選択されていた場合、Capture.tprに移行
+        //Run "Capture.tpr"        
+    }    
+}
+
+//4.kintoneへのアップロード有無に応じた処理を実行します
+//{kintone_upload}が有の場合、kintoneへのアップロードスクリプトを開始
+if({kintone_upload}=="有"){
+    //Run "kintone.tpr"       
+}
+
+Report "results.xml"

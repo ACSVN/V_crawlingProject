@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><tprproject>
+<date>28-08-19 22:08</date>
+<uid>p16cd857f8ec</uid>
+<ver>1</ver>
+<paths>
+<reports>reports</reports>
+<templates>templates</templates>
+<schedules>schedules</schedules>
+<stype1>tpr</stype1>
+<stype2>src</stype2>
+<sotype2>classes</sotype2>
+</paths>
+<tver>5.0.5-20190816.1</tver>
+<lastmod>12-09-19 13:17</lastmod>
+<editors>tpr\kintone\KintoneUpload.tpr;tpr\rikunabi\rikunabiPngEdit.tpr;tpr\HBinput.tpr;tpr\S3\S3upload.tpr;tpr\HTTrack\HTTrack.tpr;tpr\mynavi\savepagesource.tpr;tpr\mynavi\mynavi.tpr;tpr\rikunabi\rikunabi.tpr</editors>
+</tprproject>
