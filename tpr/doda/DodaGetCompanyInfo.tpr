@@ -1,3 +1,4 @@
+Var result="1"
 //190624 made by s.kodama
 //このスクリプトは、AccessDodaWithJavaによって生成されたhreflist.csvから
 //企業詳細ページのURLを読み込み、各企業情報を得ます。
@@ -167,22 +168,16 @@ java {
                         if (n.nodeName().equals("#comment")) {
                             Comment c1 = (Comment)n;
                             if (c1.getData().trim().startsWith("原稿種別: E")) {
-//                              getContext().setVariable("rank","E");
                                 rank = "E";
                             } else if (c1.getData().trim().startsWith("原稿種別: D")) {
-//                              getContext().setVariable("rank","D");
                                 rank = "D";
                             } else if (c1.getData().trim().startsWith("原稿種別: C")) {
-//                              getContext().setVariable("rank","C");
                                 rank = "C";
                             } else if (c1.getData().trim().startsWith("原稿種別: B")) {
-//                              getContext().setVariable("rank","B");
                                 rank = "B";
                             } else if (c1.getData().trim().startsWith("原稿種別: A")) {
-//                              getContext().setVariable("rank","A");
                                 rank = "A";
                             } else if (c1.getData().trim().startsWith("原稿種別: T")) {
-//                              getContext().setVariable("rank","T");
                                 rank = "T";
                                 fi.close();
                                 return;
@@ -234,8 +229,6 @@ java {
     Log {check_detail}
     Log {rank}
     Run "{_PROJECT_DIR}\tpr\kintone\KintoneMakeWait.tpr"
-//次のスクリプトに引継ぎ
-//190903kodama "Doda"を"doda"に変更
+
 Var web_site="doda"
-    //次はHTTrackを呼び出す
-    Run "..\HTTrack\HTTrack.tpr"
+Var result="0"

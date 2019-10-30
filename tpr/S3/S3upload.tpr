@@ -1,3 +1,4 @@
+Var result="1"
 //made by kodama 190903
 //このスクリプトは、AWS S3に接続するための動作の自動化を目的としています。
 //コマンドプロンプト上でのAWS CLIの使用を前提とします。（sync命令動作監視のため）
@@ -32,7 +33,6 @@ Press Enter wait=2s
 
 //ここで、コマンドプロンプト終了
 
-//Var web_site="rikunabi"
 
 //■{website}_kintone.csv（S3版）を作成
 // kintone.csvを作る
@@ -141,6 +141,4 @@ java {
 Log {check_detail1}
 Log {check_detail1}
 
-//法人番号の付加（HBinput.tpr）に移行
-Run "..\HBinput.tpr"
-
+Var result="0"

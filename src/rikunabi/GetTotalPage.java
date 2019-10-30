@@ -47,7 +47,7 @@ public class GetTotalPage extends DefaultJavaTestScript  {
               total_page  = (total_q/dis_case)+1;
           }
           
-          getContext().setVariable("number_pages", total_page);
+          getContext().setVariable("number_pages2", total_page);
       } catch (StopRequestException ex) {
          getContext().setVariable("number_pages", 0);
          throw ex;

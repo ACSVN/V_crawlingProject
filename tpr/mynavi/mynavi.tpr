@@ -1,6 +1,6 @@
 //Variable check status source code run
 Var check_status=""
-
+Var result="1"
 //directory.txtとweb_site.txtを作成
 Press Windows+r wait=1s
 Paste "cmd" wait=1s
@@ -10,6 +10,8 @@ Press Enter wait=1s
 Paste "echo {_PROJECT_DIR}> directory.txt" wait=1s
 Press Enter wait=1s
 Paste "echo mynavi> web_site.txt" wait=1s
+Press Enter wait=1s
+Paste "del mynavi.csv" wait=1s
 Press Enter wait=1s
 Paste "exit" wait=1s
 Press Enter wait=1s
@@ -91,11 +93,6 @@ Press Enter wait=1s
 Press Windows+up
 Wait "3s"
 
-//Press "Ctrl+T"
-//Paste {url}
-//Press "Enter"
-//Wait "5s"
-
 for (i=0; {i}<{total_click_search}; i={i}+1) {
     Log {i}
     Var flag=0
@@ -115,11 +112,13 @@ Wait "1s"
 Press "Ctrl+C"
 Wait "1s"
 Var url_web={_SERVER_CLIPBOARD_CONTENT_TEXT}
-Run "{_PROJECT_DIR}\src\mynavi\GetTotalPage.java"
+Run "{_PROJECT_DIR}\src\mynavi\GetTotalPage.java" replace_nxt_p="{replace_nxt_p}" url_web="{url_web}" class_total="{class_total}" case_display="{case_display}"
+Wait "1s"
+
 Log {number_pages}
 Wait "1s"
 
-Run "{_PROJECT_DIR}\src\mynavi\OutputFileCreate.java"
+Run "{_PROJECT_DIR}\src\mynavi\OutputFileCreate.java" _PROJECT_DIR="{_PROJECT_DIR}" web_name="{web_name}"
 Log {check_status}
 
 if({number_pages} > 1){
@@ -127,7 +126,7 @@ if({number_pages} > 1){
        // for (j=1; {j}<=3; j={j}+1) {
             Var fonud=0
             Var page_item={j}
-            Run "{_PROJECT_DIR}\src\mynavi\GetUrlPage.java"
+            Run "{_PROJECT_DIR}\src\mynavi\GetUrlPage.java" replace_nxt_p="{replace_nxt_p}" url_web="{url_web}" page_item="{page_item}"
             Log {path_url_page}
             Wait "1s"
             Press "Ctrl+T"
@@ -144,7 +143,7 @@ if({number_pages} > 1){
             Wait "5s"
            
             Var name_html_file="temp"
-            Run "{_PROJECT_DIR}\src\mynavi\DeleteFileExist.java"
+            Run "{_PROJECT_DIR}\src\mynavi\DeleteFileExist.java" _PROJECT_DIR="{_PROJECT_DIR}"
             Wait "2s"
             Log {check_status}
             Run "savepagesource.tpr"
@@ -160,7 +159,7 @@ if({number_pages} > 1){
             }
             if({found_image}==1){
                 Var page_item={j}
-                Run "{_PROJECT_DIR}\src\mynavi\GetHref.java"
+                Run "{_PROJECT_DIR}\src\mynavi\GetHref.java" class_caption="{class_caption}" class_domain="{class_domain}" class_company="{class_company}" new_or_all="{new_or_all}" class_remark="{class_remark}" _PROJECT_DIR="{_PROJECT_DIR}" class_company_recruiter="{class_company_recruiter}" page_item="{page_item}" class_info_job="{class_info_job}" class_industry="{class_industry}" class_title="{class_title}" url="{url}" class_main_office="{class_main_office}" class_date_period="{class_date_period}" class_company_address="{class_company_address}" class_company_phone="{class_company_phone}" web_name="{web_name}" row_ind_href_empty="{row_ind_href_empty}" class_href="{class_href}"
                 Log {check_status}
                 Click "image" passrate="70" template="close_list_download.PNG"
                 Press "Ctrl+W"
@@ -169,7 +168,7 @@ if({number_pages} > 1){
       }
 }else{
       Var name_html_file="temp"
-      Run "{_PROJECT_DIR}\src\mynavi\DeleteFileExist.java"
+      Run "{_PROJECT_DIR}\src\mynavi\DeleteFileExist.java" _PROJECT_DIR="{_PROJECT_DIR}"
       Log {check_status}
       Run "savepagesource.tpr"
       for (k=0; {k}<1000; k={k}+1) {
@@ -181,7 +180,7 @@ if({number_pages} > 1){
             }
       }
       Var page_item=1
-      Run "{_PROJECT_DIR}\src\mynavi\GetHref.java"
+      Run "{_PROJECT_DIR}\src\mynavi\GetHref.java" class_caption="{class_caption}" class_domain="{class_domain}" class_company="{class_company}" new_or_all="{new_or_all}" class_remark="{class_remark}" _PROJECT_DIR="{_PROJECT_DIR}" class_company_recruiter="{class_company_recruiter}" page_item="{page_item}" class_info_job="{class_info_job}" class_industry="{class_industry}" class_title="{class_title}" url="{url}" class_main_office="{class_main_office}" class_date_period="{class_date_period}" class_company_address="{class_company_address}" class_company_phone="{class_company_phone}" web_name="{web_name}" row_ind_href_empty="{row_ind_href_empty}" class_href="{class_href}"
       Log {check_status}
       Wait "5s"
 }
@@ -190,10 +189,5 @@ Press "Ctrl+Shift+W"
 
 File "close" save="false" id="id1"
 
-//Run "updateHrefEmpty.tpr"
-
-//Run "..\..\src\mynavi\DeleteFileExist.java"
-//Wait "2s"
-//Log {check_status}
 Var web_site="mynavi"
-Run "{_PROJECT_DIR}\tpr\HTTrack\HTTrack.tpr"
+Var result="0"

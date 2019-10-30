@@ -1,10 +1,6 @@
+Var result="1"
 Var Fin_code="0"
-//テスト用
-//Var web_site="doda"
-//Var web_site="mynavi"
-//Var web_site="rikunabi"
 
-//Browser "open" browser="chrome" url="https://vprpa.cybozu.com/k/"
 Press "Windows+r"
 Wait 0.5s
 Paste "chrome https://vp-rpa.cybozu.com/k/#/space/3"
@@ -15,7 +11,7 @@ for (i=1; {i}<100 ; i={i}+1) {
 Compareto "kintone\readagain" method="search2"
 if ({_EXIT_CODE} == 0) {
     break
-}
+   }
 }
 
 Press "Windows+up"
@@ -30,23 +26,39 @@ if ({_EXIT_CODE} == 0) {
     Wait 0.5s
     Paste "vprpa0906@gmail.com"
     Wait 0.5s
-//    Click "image" passrate="90" template="pass"
     Press tab
     Wait 0.5s
     Paste "Vprpa0906"
 
-//    Click "image" passrate="90" template="kintone\login_button"
     Press enter
 }
 
-//kintoneをクリック
-//Click "image" template="kintone\kintone_icon"
-
-//Salesをクリック
 Var found=0
+
+//顧客リストをクリック 背景　青/白ともに動作することを確認済
+//1366*768で画面上にアイコンがないことがあったので、見つかるまでスクロールする処理追加
+Var found=0
+
+File "open" file="{_PROJECT_DIR}\result\URL.txt" id="1"
+File "read" line="1" id="1"
+Var URL="{_FILE_LINE_TEXT}"
+
+
+Wait 0.5s
+for (;0==0;) {
+    Press F6
+    Wait 0.5s
+    Paste "{URL}"
+    Wait 0.5s
+    Press enter
+    Wait 3s
+    Compareto "kintone\kintone_check"
+    if ({_EXIT_CODE} > 0) {
+        Break
+    }
+}
 //for (j=1; {j}<11; j={j}+1) {
-//    // Please edit the command below to add one or more template images
-//    Compareto "kintone\sales_icon" method="search2"
+//    Compareto "kintone\coslist_icon" method="search2"
 //    if ({_EXIT_CODE} > 0) {
 //        Mouse wheeldown count=2 wait=1s
 //    } else {
@@ -56,31 +68,12 @@ Var found=0
 //    }
 //}
 //if ({found} == 0) {
-//    Exit 1 desc="Component not found (sales)."
+//    Exit 1 desc="Component not found."
 //}
-//
-//顧客リストをクリック 背景　青/白ともに動作することを確認済
-//1366*768で画面上にアイコンがないことがあったので、見つかるまでスクロールする処理追加
-Var found=0
-for (j=1; {j}<11; j={j}+1) {
-    // Please edit the command below to add one or more template images
-    Compareto "kintone\coslist_icon" method="search2"
-    if ({_EXIT_CODE} > 0) {
-        Mouse wheeldown count=2 wait=1s
-    } else {
-        Mouse click to=x:{_COMPARETO_CLICK_X},y:{_COMPARETO_CLICK_Y}
-        Var found=1
-        Break
-    }
-}
-if ({found} == 0) {
-    Exit 1 desc="Component not found."
-}
 
 
-//点３つのアイコンをクリック。動作不安定なら座標から取得する必要あるかも
+//点３つのアイコンをクリック。
 Click "image" passrate="90" template="kintone\3dot_icon"
-//Click "object" cmparea="x:1718,y:390,w:167,h:54"
 
 Click "image" template="kintone\read_by_file"
 
@@ -94,7 +87,6 @@ Compareto "kintone\hiraku_check" method="search2"
 Paste {_PROJECT_DIR}\result\HB_noBOM.csv
 
 //kintone.csvをアップロード
-//Paste {_PROJECT_DIR}\result\kintone.csv
 
 
 Wait 0.5s
@@ -106,7 +98,7 @@ for (i=0; {i}<10; i={i}+1) {
 if ({_EXIT_CODE} == 0) {
     Var Fin_code="1"
         break
-}
+   }
 }
 //もともと「はい」が選択されていれば処理なし。選択されていなければ選択する。
 for (;0==0;){
@@ -119,7 +111,7 @@ Compareto "kintone\y_or_n-y" passrate="90" method="search2"
     if ({_EXIT_CODE} == 0) {
         break
         }
-}
+   }
 }
 
 //文字コードがSHIFT-JISでなければSHIFT-JISにする（文字化け回避）
@@ -129,22 +121,22 @@ if ({_EXIT_CODE} == 0) {
     Click "image" template="kintone\char_code_utf-8"
 }
 for (j=1; {j}<11; j={j}+1) {
-    // Please edit the command below to add one or more template images
     Compareto "houzin" method="search2"
     if ({_EXIT_CODE} > 0) {
-        Mouse wheeldown count=2 wait=1s
+        Mouse wheeldown count=3 wait=1s
     } else {
         Mouse click to=x:{_COMPARETO_CLICK_X},y:{_COMPARETO_CLICK_Y}
         Var found=1
         Break
     }
 }
+
+
 Click "image" template="houzin2"
 Click "image" template="edaban"
 Click "image" template="edaban2"
 Var found=0
 for (j=1; {j}<11; j={j}+1) {
-    // Please edit the command below to add one or more template images
     Compareto "kintone\input_button" method="search2"
     if ({_EXIT_CODE} > 0) {
         Mouse wheelup count=2 wait=1s
@@ -171,3 +163,4 @@ if ({_EXIT_CODE} == 0) {
     Wait 5s
     Press "Alt+F4"
 }
+Var result="0"

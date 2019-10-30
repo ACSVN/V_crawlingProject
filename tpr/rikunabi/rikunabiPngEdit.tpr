@@ -4,7 +4,7 @@
 //190904 change by kodama
 //GDriveからAWSへのアップロード場所変更に伴い、動きを変更としました。
 //また、名称をrikunabiPngEditに変更しました。
-
+Var result="1"
 Var dir={_PROJECT_DIR}
 
 //ダウンロードフォルダにあることを想定しています。
@@ -83,8 +83,8 @@ Wait 1s
 
 
 Var web_site="rikunabi"
-Run "..\S3\S3upload.tpr"
-
+//Run "..\S3\S3upload.tpr"
+Var result="0"
 ////rikunabi_rename.batを{filename}に移す
 ////Paste "copy /Y {_PROJECT_DIR}\batch_file\rikunabi_rename.bat {_ENV_USERPROFILE}\Desktop\HTTrackLog\{filename}\rikunabi_rename.bat"
 //Wait 1s

@@ -56,30 +56,6 @@ public class SelectOrder extends DefaultJavaTestScript implements ActionListener
             combo1.setPreferredSize(new Dimension(80, 30));
             mainPanel.add(combo1);
 //            combo1.addActionListener(this);
-            
-        //新着のみとすべての変更設定
-                 mainPanel.add(new JLabel("取得方法設定"));            
-                 String[] new_or_all = {"新着のみ", "全て"};
-            JComboBox<String> combo2;
-                  combo2 = new JComboBox<String>(new_or_all);
-            combo2.setPreferredSize(new Dimension(80, 30));
-                  mainPanel.add(combo2);
-                     
-                   //キャプチャ取得有無の設定
-                 mainPanel.add(new JLabel("キャプチャ取得設定"));            
-                 String[] capture = {"有", "無"};
-                 JComboBox<String> combo3;
-                 combo3 = new JComboBox<String>(capture);
-                 combo3.setPreferredSize(new Dimension(80, 30));
-                 mainPanel.add(combo3);        
-                 
-                 //キャプチャ取得有無の設定
-                 mainPanel.add(new JLabel("kintoneへのアップロード"));            
-                 String[] kintone_upload = {"有", "無"};
-                 JComboBox<String> combo4;
-                 combo4 = new JComboBox<String>(kintone_upload);
-                 combo4.setPreferredSize(new Dimension(80, 30));
-                 mainPanel.add(combo4); 
              
             int result=-1;
             int clicknum=-1;
@@ -88,18 +64,12 @@ public class SelectOrder extends DefaultJavaTestScript implements ActionListener
              result = JOptionPane.showConfirmDialog(null, mainPanel, "Webクローラ動作設定", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             
             if (result == JOptionPane.OK_OPTION) {
-                    clicknum = JOptionPane.showConfirmDialog(null, "対象サイト:"+(String)combo1.getSelectedItem()+br+"新着/すべて:"+(String)combo2.getSelectedItem()+br+"キャプチャ取得:"+(String)combo3.getSelectedItem()+br+"kintoneへのアップロード:"+(String)combo4.getSelectedItem()+br+"で実行しますか？","入力確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    clicknum = JOptionPane.showConfirmDialog(null, "対象サイト:"+(String)combo1.getSelectedItem()+br+"で実行しますか？","入力確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                     getContext().setVariable("option_btn", 0);
                               getContext().setVariable("web_site", (String)combo1.getSelectedItem());
-                              getContext().setVariable("new_or_all", (String)combo2.getSelectedItem());
-                              getContext().setVariable("capture", (String)combo3.getSelectedItem());
-                              getContext().setVariable("kintone_upload", (String)combo4.getSelectedItem());
             } else {
                     getContext().setVariable("option_btn", 1);
                     getContext().setVariable("web_site", "");
-                    getContext().setVariable("new_or_all","");
-                    getContext().setVariable("capture", "");
-                    getContext().setVariable("kintone_upload", "");
                     clicknum=0;
             }
         }

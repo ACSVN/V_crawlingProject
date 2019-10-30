@@ -63,9 +63,10 @@ public class GetHref extends DefaultJavaTestScript  {
             String path = getContext().getVariableAsString("_PROJECT_DIR");
             String fullPathDir = URLDecoder.decode(path, "UTF-8");
             fullPathDir = fullPathDir.replace("\\", "/");
-            
+            getContext().setVariable("aaaaa", "fullPathDir");
             //load list href in data storage
-            String path_file_data_storage = fullPathDir + "/result/data_storage_" + web_name + ".csv";
+                  String path_file_data_storage = fullPathDir + "/result/data_storage_" + web_name + ".csv";              
+                  
             //create new file if have not data storage
             this.createNewFile(path_file_data_storage);
             //load data storge of href

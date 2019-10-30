@@ -29,6 +29,7 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
             String path = getContext().getVariableAsString("_PROJECT_DIR");
             String fullPathDir = URLDecoder.decode(path, "UTF-8");
             fullPathDir = fullPathDir.replace("\\", "/");
+            getContext().setVariable("test22", fullPathDir);
             
             //DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
             //Date date = new Date();

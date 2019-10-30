@@ -1,4 +1,5 @@
 //Variable check status source code run
+Var result="1"
 Var web_site="rikunabi"
 Var check_status=""
 Var dir={_PROJECT_DIR}
@@ -116,8 +117,7 @@ if ( 0==0 ){
    Var row_start=2
 }
 File "open" file="{load_file_name}" id="id2"
-
-Run "{_PROJECT_DIR}\src\rikunabi\OutputFileCreate.java"
+Run "{_PROJECT_DIR}\src\rikunabi\OutputFileCreate.java" path_href_file="{path_href_file}" _PROJECT_DIR="{_PROJECT_DIR}" UTF-8="{UTF-8}" web_name="{web_name}" dir_path="{dir_path}" number_pages="{number_pages}"
 Log {check_status}
 Log {_FILE_LINE_COUNT}
 
@@ -138,26 +138,31 @@ for (ln={row_start}; {ln}<{_FILE_LINE_COUNT}+1; ln={ln}+1) {
     Press "Enter"
     Wait "5s"
     
+    Log {number_pages}
+    
+    Var number_pages2="{number_pages}"
     Press F6
     Press "Ctrl+C"
     Var url_web={_SERVER_CLIPBOARD_CONTENT_TEXT}
-    Run "{_PROJECT_DIR}\src\rikunabi\GetTotalPage.java"
+    Run "{_PROJECT_DIR}\src\rikunabi\GetTotalPage.java" replace_nxt_p="{replace_nxt_p}" url_web="{url_web}" class_total="{class_total}" number_pages="{number_pages}" case_display="{case_display}"
     Wait "5s"
     Log {number_pages}
+    Log {number_pages2}
     
-    if({number_pages} > 1){
-    //for (j=1; {j}<={number_pages}; j={j}+1) {
-    for (j=1; {j}<=2; j={j}+1) {
+    if({number_pages2} > 1){
+    for (j=1; {j}<={number_pages2}; j={j}+1) {
+   // for (j=1; {j}<=3; j={j}+1) {
             Var found_image_next=0
             Var page_item={j}
             Press F6
             Press "Ctrl+C"
+            Log "={_SERVER_CLIPBOARD_CONTENT_TEXT}"
             Var url_web_item={_SERVER_CLIPBOARD_CONTENT_TEXT}
     
-            Run "{_PROJECT_DIR}\src\rikunabi\GetHref.java"
+            Run "{_PROJECT_DIR}\src\rikunabi\GetHref.java" class_caption="{class_caption}" class_domain="{class_domain}" class_company="{class_company}" num_page="{num_page}" _PROJECT_DIR="{_PROJECT_DIR}" menu_item="{menu_item}" page_item="{page_item}" class_info_job="{class_info_job}" path_file_name="{path_file_name}" class_industry="{class_industry}" dir_path="{dir_path}" number_pages="{number_pages}" class_title="{class_title}" url="{url}" path_file="{path_file}" class_company_info="{class_company_info}" class_date_period="{class_date_period}" web_name="{web_name}" url_web_item="{url_web_item}" class_href="{class_href}"
             Wait "5s"
             Log {check_status}
-            if({j}<{number_pages}){
+            if({j}<{number_pages2}){
                for (;0==0;) {
                    Compareto "rikunabi\nextpage" passrate="70" method="search2"
                    if({_EXIT_CODE} > 0){
@@ -177,8 +182,8 @@ for (ln={row_start}; {ln}<{_FILE_LINE_COUNT}+1; ln={ln}+1) {
         Press F6
         Press "Ctrl+C"
         Var url_web_item={_SERVER_CLIPBOARD_CONTENT_TEXT}
-        Run "{_PROJECT_DIR}\src\rikunabi\GetHref.java"
-        Log {check_status}
+        Run "{_PROJECT_DIR}\src\rikunabi\GetHref.java" class_caption="{class_caption}" class_domain="{class_domain}" class_company="{class_company}" _PROJECT_DIR="{_PROJECT_DIR}" menu_item="{menu_item}" page_item="{page_item}" class_info_job="{class_info_job}" class_industry="{class_industry}" class_title="{class_title}" url="{url}" class_company_info="{class_company_info}" class_date_period="{class_date_period}" web_name="{web_name}" url_web_item="{url_web_item}" class_href="{class_href}"
+
     }
     Press "Ctrl+W"
     
@@ -187,50 +192,9 @@ for (ln={row_start}; {ln}<{_FILE_LINE_COUNT}+1; ln={ln}+1) {
 ///// スクリーンショットを取る /////
 Var dir={_PROJECT_DIR}
 Log screen
-java {
 
-    import java.io.BufferedReader;
-    import java.io.File;
-    import java.io.FileNotFoundException;
-    import java.io.FileReader;
-    import java.io.IOException;
-    import java.util.ArrayList;
-    import java.util.Arrays;
-    import java.util.List;
-    import java.io.FileWriter;
-    import java.io.BufferedWriter;
-    import java.io.PrintWriter;
+Run "..\..\src\rikunabi\Screenshot.java" dir="{dir}"
 
-    String dirname = getVariableAsString("dir");  // ディレクトリ名(相対パスから逃げ)
-
-    String filename = dirname + "\\result\\rikunabi.csv";    // 入力ファイル名
-    String outputname = dirname + "\\result\\rikunabi_URLlist.csv";  // 出力ファイル名
-
-    try {
-        BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(outputname)));
-
-        String line = "";
-        boolean first = true;
-
-        while ((line = br.readLine()) != null) {
-            String array[] = line.split(",");  // カンマごとに分ける
-            if (first) {
-                first = false;  // 最初の行だけこっちの処理(出力なし)
-            } else {
-                pw.println(array[0].substring(array[0].indexOf("http")));  // コピーしたい行のみ出力
-            }
-        }
-        br.close();
-        pw.close();
-
-    } catch (FileNotFoundException e) {
-        getContext().setVariable("check_detail", "99");
-    } catch (IOException e) {
-        getContext().setVariable("check_detail", "999");
-    }
-
-} endjava
 Wait "1m"
 //URLlistファイルを開く
 File "open" file="{_PROJECT_DIR}\result\rikunabi_URLlist.csv" id="rikunabi_csv"
@@ -248,8 +212,8 @@ Eval s_x2={_DISPLAY_W_1}-100
 Eval s_y2={_DISPLAY_H_1}-100
 
 Log "スクリーンショット処理開始"
-//for ( csv_cnt=1 ; {csv_cnt}<={FileLineMax} ; csv_cnt={csv_cnt}+1 ){
-for ( csv_cnt=1 ; {csv_cnt}<=3 ; csv_cnt={csv_cnt}+1 ){
+for ( csv_cnt=1 ; {csv_cnt}<={FileLineMax} ; csv_cnt={csv_cnt}+1 ){
+//for ( csv_cnt=1 ; {csv_cnt}<=3 ; csv_cnt={csv_cnt}+1 ){
     //1件ずつ処理を実行する
     File "read" line="{csv_cnt}" column="1" length="1" id="rikunabi_csv"
     Press "Ctrl+T" wait=2s
@@ -308,5 +272,4 @@ Log "スクリーンショット処理終了"
 File "close" save="false" id="id2"
 
 Press "Ctrl+Shift+W"
-
-Run "rikunabiPngEdit.tpr" web_site={web_site}
+Var result="0"

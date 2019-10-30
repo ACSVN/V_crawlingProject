@@ -1,0 +1,1480 @@
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      <!--
+      -->
+    </style>
+  </head>
+  <body>
+<code>
+<a name="line1"/>
+<span id="line1">
+  <font size="-1">1.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//エントリポイント</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line2"/>
+<span id="line2">
+  <font size="-1">2.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Report</b>
+      </span>
+       <span style="color: #008000">
+<b>"results.xml"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line3"/>
+<span id="line3">
+  <font size="-1">3.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//設定で用いる変数の設定</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line4"/>
+<span id="line4">
+  <font size="-1">4.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>web_site=</b>
+      </span>
+""
+    
+
+    </span>
+    <br>
+<a name="line5"/>
+<span id="line5">
+  <font size="-1">5.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>new_or_all=</b>
+      </span>
+""
+    
+
+    </span>
+    <br>
+<a name="line6"/>
+<span id="line6">
+  <font size="-1">6.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>capture=</b>
+      </span>
+""
+    
+
+    </span>
+    <br>
+<a name="line7"/>
+<span id="line7">
+  <font size="-1">7.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>kintone_upload=</b>
+      </span>
+""
+    
+
+    </span>
+    <br>
+<a name="line8"/>
+<span id="line8">
+  <font size="-1">8.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>option_btn=</b>
+      </span>
+""
+    
+
+    </span>
+    <br>
+<a name="line9"/>
+<span id="line9">
+  <font size="-1">9.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line10"/>
+<span id="line10">
+  <font size="-1">10.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//1.メニューを呼び出し、Webクロール条件を選択します</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line11"/>
+<span id="line11">
+  <font size="-1">11.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\src\scripts\SelectOrder.java"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line12"/>
+<span id="line12">
+  <font size="-1">12.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Log</b>
+      </span>
+       <span style="color: #008000">
+<b>{web_site}</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line13"/>
+<span id="line13">
+  <font size="-1">13.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line14"/>
+<span id="line14">
+  <font size="-1">14.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line15"/>
+<span id="line15">
+  <font size="-1">15.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Wait</b>
+      </span>
+       <span style="color: #008000">
+<b>3s</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line16"/>
+<span id="line16">
+  <font size="-1">16.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line17"/>
+<span id="line17">
+  <font size="-1">17.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line18"/>
+<span id="line18">
+  <font size="-1">18.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//■処理の分岐</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line19"/>
+<span id="line19">
+  <font size="-1">19.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//2.指定された{web_site}に応じた処理を実行します</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line20"/>
+<span id="line20">
+  <font size="-1">20.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//{web_site}でDodaが選択されている場合は、Dodaの処理を行う</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line21"/>
+<span id="line21">
+  <font size="-1">21.</font>&nbsp;&nbsp;&nbsp;    
+      <b>if</b>({web_site}=="Doda"){
+    
+
+    </span>
+    <br>
+<a name="line22"/>
+<span id="line22">
+  <font size="-1">22.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line23"/>
+<span id="line23">
+  <font size="-1">23.</font>&nbsp;&nbsp;&nbsp;    
+                  <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log</b>
+      </span>
+       <span style="color: #008000">
+<b>"doda_select"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line24"/>
+<span id="line24">
+  <font size="-1">24.</font>&nbsp;&nbsp;&nbsp;    
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line25"/>
+<span id="line25">
+  <font size="-1">25.</font>&nbsp;&nbsp;&nbsp;    
+               <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\doda\DodaGetHreflist.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line26"/>
+<span id="line26">
+  <font size="-1">26.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line27"/>
+<span id="line27">
+  <font size="-1">27.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line28"/>
+<span id="line28">
+  <font size="-1">28.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line29"/>
+<span id="line29">
+  <font size="-1">29.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line30"/>
+<span id="line30">
+  <font size="-1">30.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line31"/>
+<span id="line31">
+  <font size="-1">31.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line32"/>
+<span id="line32">
+  <font size="-1">32.</font>&nbsp;&nbsp;&nbsp;    
+              <span style="color: #000080">
+<b>&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\doda\DodaGetCompanyInfo.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line33"/>
+<span id="line33">
+  <font size="-1">33.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line34"/>
+<span id="line34">
+  <font size="-1">34.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line35"/>
+<span id="line35">
+  <font size="-1">35.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line36"/>
+<span id="line36">
+  <font size="-1">36.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line37"/>
+<span id="line37">
+  <font size="-1">37.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line38"/>
+<span id="line38">
+  <font size="-1">38.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>web_site=</b>
+      </span>
+<i>"doda"</i>
+    
+
+    </span>
+    <br>
+<a name="line39"/>
+<span id="line39">
+  <font size="-1">39.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line40"/>
+<span id="line40">
+  <font size="-1">40.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line41"/>
+<span id="line41">
+  <font size="-1">41.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\HTTrack\HTTrack.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line42"/>
+<span id="line42">
+  <font size="-1">42.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line43"/>
+<span id="line43">
+  <font size="-1">43.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line44"/>
+<span id="line44">
+  <font size="-1">44.</font>&nbsp;&nbsp;&nbsp;    
+          &nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line45"/>
+<span id="line45">
+  <font size="-1">45.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line46"/>
+<span id="line46">
+  <font size="-1">46.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line47"/>
+<span id="line47">
+  <font size="-1">47.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Log</b>
+      </span>
+       <span style="color: #008000">
+<b>{web_site}</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line48"/>
+<span id="line48">
+  <font size="-1">48.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line49"/>
+<span id="line49">
+  <font size="-1">49.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line50"/>
+<span id="line50">
+  <font size="-1">50.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\S3\S3upload.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line51"/>
+<span id="line51">
+  <font size="-1">51.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line52"/>
+<span id="line52">
+  <font size="-1">52.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line53"/>
+<span id="line53">
+  <font size="-1">53.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line54"/>
+<span id="line54">
+  <font size="-1">54.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line55"/>
+<span id="line55">
+  <font size="-1">55.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line56"/>
+<span id="line56">
+  <font size="-1">56.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line57"/>
+<span id="line57">
+  <font size="-1">57.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\HBinput.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line58"/>
+<span id="line58">
+  <font size="-1">58.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line59"/>
+<span id="line59">
+  <font size="-1">59.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line60"/>
+<span id="line60">
+  <font size="-1">60.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line61"/>
+<span id="line61">
+  <font size="-1">61.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line62"/>
+<span id="line62">
+  <font size="-1">62.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line63"/>
+<span id="line63">
+  <font size="-1">63.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line64"/>
+<span id="line64">
+  <font size="-1">64.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\kintone\KintoneUpload.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line65"/>
+<span id="line65">
+  <font size="-1">65.</font>&nbsp;&nbsp;&nbsp;    
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line66"/>
+<span id="line66">
+  <font size="-1">66.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line67"/>
+<span id="line67">
+  <font size="-1">67.</font>&nbsp;&nbsp;&nbsp;    
+         &nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line68"/>
+<span id="line68">
+  <font size="-1">68.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line69"/>
+<span id="line69">
+  <font size="-1">69.</font>&nbsp;&nbsp;&nbsp;    
+            
+    
+
+    </span>
+    <br>
+<a name="line70"/>
+<span id="line70">
+  <font size="-1">70.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//{web_site}でMynaviが選択されている場合は、mynaviの処理を行う</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line71"/>
+<span id="line71">
+  <font size="-1">71.</font>&nbsp;&nbsp;&nbsp;    
+      }<b>else if</b>({web_site}=="mynavi"){
+    
+
+    </span>
+    <br>
+<a name="line72"/>
+<span id="line72">
+  <font size="-1">72.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line73"/>
+<span id="line73">
+  <font size="-1">73.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Log</b>
+      </span>
+       <span style="color: #008000">
+<b>"mynavi_select"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line74"/>
+<span id="line74">
+  <font size="-1">74.</font>&nbsp;&nbsp;&nbsp;    
+         <b>&nbsp;&nbsp;&nbsp;for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line75"/>
+<span id="line75">
+  <font size="-1">75.</font>&nbsp;&nbsp;&nbsp;    
+                    <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\mynavi\mynavi.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line76"/>
+<span id="line76">
+  <font size="-1">76.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line77"/>
+<span id="line77">
+  <font size="-1">77.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line78"/>
+<span id="line78">
+  <font size="-1">78.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line79"/>
+<span id="line79">
+  <font size="-1">79.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line80"/>
+<span id="line80">
+  <font size="-1">80.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line81"/>
+<span id="line81">
+  <font size="-1">81.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>web_site=</b>
+      </span>
+<i>"mynavi"</i>
+    
+
+    </span>
+    <br>
+<a name="line82"/>
+<span id="line82">
+  <font size="-1">82.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line83"/>
+<span id="line83">
+  <font size="-1">83.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line84"/>
+<span id="line84">
+  <font size="-1">84.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\HTTrack\HTTrack.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line85"/>
+<span id="line85">
+  <font size="-1">85.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line86"/>
+<span id="line86">
+  <font size="-1">86.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line87"/>
+<span id="line87">
+  <font size="-1">87.</font>&nbsp;&nbsp;&nbsp;    
+          &nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line88"/>
+<span id="line88">
+  <font size="-1">88.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line89"/>
+<span id="line89">
+  <font size="-1">89.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line90"/>
+<span id="line90">
+  <font size="-1">90.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Log</b>
+      </span>
+       <span style="color: #008000">
+<b>{web_site}</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line91"/>
+<span id="line91">
+  <font size="-1">91.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line92"/>
+<span id="line92">
+  <font size="-1">92.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line93"/>
+<span id="line93">
+  <font size="-1">93.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\S3\S3upload.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line94"/>
+<span id="line94">
+  <font size="-1">94.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line95"/>
+<span id="line95">
+  <font size="-1">95.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line96"/>
+<span id="line96">
+  <font size="-1">96.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line97"/>
+<span id="line97">
+  <font size="-1">97.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line98"/>
+<span id="line98">
+  <font size="-1">98.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line99"/>
+<span id="line99">
+  <font size="-1">99.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line100"/>
+<span id="line100">
+  <font size="-1">100.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\HBinput.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line101"/>
+<span id="line101">
+  <font size="-1">101.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line102"/>
+<span id="line102">
+  <font size="-1">102.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line103"/>
+<span id="line103">
+  <font size="-1">103.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line104"/>
+<span id="line104">
+  <font size="-1">104.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line105"/>
+<span id="line105">
+  <font size="-1">105.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line106"/>
+<span id="line106">
+  <font size="-1">106.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line107"/>
+<span id="line107">
+  <font size="-1">107.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\kintone\KintoneUpload.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line108"/>
+<span id="line108">
+  <font size="-1">108.</font>&nbsp;&nbsp;&nbsp;    
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line109"/>
+<span id="line109">
+  <font size="-1">109.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line110"/>
+<span id="line110">
+  <font size="-1">110.</font>&nbsp;&nbsp;&nbsp;    
+         &nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line111"/>
+<span id="line111">
+  <font size="-1">111.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line112"/>
+<span id="line112">
+  <font size="-1">112.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line113"/>
+<span id="line113">
+  <font size="-1">113.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #808080">
+        <i>//{web_site}でrikunabiが選択されている場合は、rikunabiの処理を行う</i>
+      </span>
+    
+
+    </span>
+    <br>
+<a name="line114"/>
+<span id="line114">
+  <font size="-1">114.</font>&nbsp;&nbsp;&nbsp;    
+      }<b>else if</b>({web_site}=="rikunabi"){
+    
+
+    </span>
+    <br>
+<a name="line115"/>
+<span id="line115">
+  <font size="-1">115.</font>&nbsp;&nbsp;&nbsp;    
+          
+    
+
+    </span>
+    <br>
+<a name="line116"/>
+<span id="line116">
+  <font size="-1">116.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Log</b>
+      </span>
+       <span style="color: #008000">
+<b>"rikunabi_select"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line117"/>
+<span id="line117">
+  <font size="-1">117.</font>&nbsp;&nbsp;&nbsp;    
+          <b>&nbsp;&nbsp;&nbsp;&nbsp;for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line118"/>
+<span id="line118">
+  <font size="-1">118.</font>&nbsp;&nbsp;&nbsp;    
+               <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\rikunabi\rikunabi.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line119"/>
+<span id="line119">
+  <font size="-1">119.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line120"/>
+<span id="line120">
+  <font size="-1">120.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line121"/>
+<span id="line121">
+  <font size="-1">121.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line122"/>
+<span id="line122">
+  <font size="-1">122.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line123"/>
+<span id="line123">
+  <font size="-1">123.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line124"/>
+<span id="line124">
+  <font size="-1">124.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Var</b>
+      </span>
+       <span style="color: #008000">
+<b>web_site=</b>
+      </span>
+<i>"rikunabi"</i>
+    
+
+    </span>
+    <br>
+<a name="line125"/>
+<span id="line125">
+  <font size="-1">125.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line126"/>
+<span id="line126">
+  <font size="-1">126.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line127"/>
+<span id="line127">
+  <font size="-1">127.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\rikunabi\rikunabiPngEdit.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line128"/>
+<span id="line128">
+  <font size="-1">128.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line129"/>
+<span id="line129">
+  <font size="-1">129.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line130"/>
+<span id="line130">
+  <font size="-1">130.</font>&nbsp;&nbsp;&nbsp;    
+          &nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line131"/>
+<span id="line131">
+  <font size="-1">131.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line132"/>
+<span id="line132">
+  <font size="-1">132.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line133"/>
+<span id="line133">
+  <font size="-1">133.</font>&nbsp;&nbsp;&nbsp;    
+      <span style="color: #000080">
+        <b>Log</b>
+      </span>
+       <span style="color: #008000">
+<b>{web_site}</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line134"/>
+<span id="line134">
+  <font size="-1">134.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line135"/>
+<span id="line135">
+  <font size="-1">135.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line136"/>
+<span id="line136">
+  <font size="-1">136.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\S3\S3upload.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line137"/>
+<span id="line137">
+  <font size="-1">137.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line138"/>
+<span id="line138">
+  <font size="-1">138.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line139"/>
+<span id="line139">
+  <font size="-1">139.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line140"/>
+<span id="line140">
+  <font size="-1">140.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line141"/>
+<span id="line141">
+  <font size="-1">141.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line142"/>
+<span id="line142">
+  <font size="-1">142.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line143"/>
+<span id="line143">
+  <font size="-1">143.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\HBinput.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line144"/>
+<span id="line144">
+  <font size="-1">144.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line145"/>
+<span id="line145">
+  <font size="-1">145.</font>&nbsp;&nbsp;&nbsp;    
+                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line146"/>
+<span id="line146">
+  <font size="-1">146.</font>&nbsp;&nbsp;&nbsp;    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line147"/>
+<span id="line147">
+  <font size="-1">147.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line148"/>
+<span id="line148">
+  <font size="-1">148.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line149"/>
+<span id="line149">
+  <font size="-1">149.</font>&nbsp;&nbsp;&nbsp;    
+      <b>for</b> (; 0 == 0; ) {
+    
+
+    </span>
+    <br>
+<a name="line150"/>
+<span id="line150">
+  <font size="-1">150.</font>&nbsp;&nbsp;&nbsp;    
+                <span style="color: #000080">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;Run</b>
+      </span>
+       <span style="color: #008000">
+<b>"{_PROJECT_DIR}\tpr\kintone\KintoneUpload.tpr"</b>
+      </span>
+
+    
+
+    </span>
+    <br>
+<a name="line151"/>
+<span id="line151">
+  <font size="-1">151.</font>&nbsp;&nbsp;&nbsp;    
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</b>({result} ==0){
+    
+
+    </span>
+    <br>
+<a name="line152"/>
+<span id="line152">
+  <font size="-1">152.</font>&nbsp;&nbsp;&nbsp;    
+             <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</b>
+    
+
+    </span>
+    <br>
+<a name="line153"/>
+<span id="line153">
+  <font size="-1">153.</font>&nbsp;&nbsp;&nbsp;    
+         &nbsp;&nbsp;&nbsp;}
+    
+
+    </span>
+    <br>
+<a name="line154"/>
+<span id="line154">
+  <font size="-1">154.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+
+    </span>
+    <br>
+<a name="line155"/>
+<span id="line155">
+  <font size="-1">155.</font>&nbsp;&nbsp;&nbsp;    
+      
+    
+
+    </span>
+    <br>
+<a name="line156"/>
+<span id="line156">
+  <font size="-1">156.</font>&nbsp;&nbsp;&nbsp;    
+      }
+    
+  </code>
+<script language="JavaScript"><!--
+document.getElementById(self.document.location.hash.substring(1)).style.background = "pink";
+//  -->
+</script></body>
+</html>

@@ -5,6 +5,8 @@ Var html_get=""
 Var k=0
 Var i=0
 
+Var result="1"
+
 //directory.txtを作成
 Press Windows+r wait=1s
 Paste "cmd" wait=1s
@@ -22,7 +24,6 @@ Press Enter wait=1s
 
 Press Windows+r wait=1s
 Paste "chrome.exe https://doda.jp/DodaFront/View/JobSearchList.action?did=T000exit001&charset=SHIFT-JIS&fktt=4&kk=2&sid=TopSearch" wait=1s
-//Paste "chrome.exe https://doda.jp/DodaFront/View/JobSearchList.action?did=T000001&charset=UTF-8&fktt=4&kk=2&sid=TopSearch" wait=1s
 Press Enter wait=1s
 
 Wait 5s
@@ -40,7 +41,6 @@ java {
     import org.jsoup.select.Elements;
     
     String dir_path = getContext().getVariableAsString("_PROJECT_DIR");
-    //String new_or_all = getContext().getVariableAsString("new_or_all");
 
     
     int kcnt=1,cnt=1; //finally避けの代入。本来の値はfor文の初期条件式
@@ -50,7 +50,7 @@ java {
 
     //リストページ1つを確認後、hreflist.csvに書き出しを、全てのリストページをチェック完了するまで繰り返す
     for(kcnt=1;kcnt<=2000&&endFlag==false;kcnt=kcnt+1){
-    //for(kcnt=1;kcnt<=1&&endFlag==false;kcnt=kcnt+1){
+   // for(kcnt=1;kcnt<=2&&endFlag==false;kcnt=kcnt+1){
         FileWriter f;
         if(first) {
             //最初のアクセス時、hreflist.csvを作り直す
@@ -124,5 +124,4 @@ java {
 //次のスクリプトに引継ぎ
 //190903kodama "Doda"から"doda"に変更
 Var web_site="doda"
-
-Run "DodaGetCompanyInfo.tpr"
+Var result="0"

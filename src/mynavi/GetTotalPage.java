@@ -37,8 +37,11 @@ public class GetTotalPage extends DefaultJavaTestScript  {
           String charset = doc.charset().toString();
           
           String total_url = doc.select(class_total).first().text();
+         
           total_url = total_url.replace(replace_nxt_p, "");
+          
           int total_q = Integer.parseInt(total_url);
+        
           if(total_q <= dis_case){
               total_page  = 1;
           }else if(total_q%dis_case == 0){
@@ -46,16 +49,16 @@ public class GetTotalPage extends DefaultJavaTestScript  {
           }else{
               total_page  = (total_q/dis_case)+1;
           }
-          
-          getContext().setVariable("number_pages", total_page);
+            getContext().setVariable("number_pages", total_page);
       } catch (StopRequestException ex) {
          getContext().setVariable("number_pages", 0);
          throw ex;
       }catch (IOException ex) {
           ex.printStackTrace();
-          getContext().setVariable("number_pages", 0);
+          getContext().setVariable("number_pages",0);
           throw new IllegalStateException(ex);
       }
+      
    }
    
    public  boolean isNullOrEmpty(String str) {

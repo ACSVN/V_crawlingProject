@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="template_ja.xsl"?><testsuite name="file:/C:/Users/vantagepoint-RPA専用PC/Desktop/VP_WebCrawl/tpr/WebCrawlMain.tpr" tests="0" time="53.279">
+<properties>
+<property name="Number" value="s6"/>
+<property name="XSL_CONFIG_ATTACH_SCRIPTS" value="true"/>
+<property name="XSL_CONFIG_ATTACH_TEMPLATES" value="true"/>
+<property name="XSL_CONFIG_CREATE_COMMENT_TABLE" value="false"/>
+<property name="XSL_CONFIG_CREATE_COMPARISON_TABLE" value="false"/>
+<property name="XSL_CONFIG_CREATE_WARNING_TABLE" value="true"/>
+<property name="XSL_CONFIG_DISPLAY_FAILED_COMPARISONS_ONLY" value="false"/>
+<property name="XSL_CONFIG_DISPLAY_WARNINGS" value="true"/>
+<property name="XSL_CONFIG_INCLUDE_STEPS_IN_BODY" value="true"/>
+<property name="XSL_END_TIME" value="1572028549076"/>
+<property name="XSL_PARAM_DURATION_SECONDS" value="501"/>
+<property name="XSL_PARAM_DURATION_STRING" value="19/10/26 3:27 - 19/10/26 3:35 (8 分 21 秒)"/>
+<property name="XSL_PARAM_LOG_FILE" value="log.html"/>
+<property name="XSL_PARAM_STATUS" value="3"/>
+<property name="XSL_START_TIME" value="1572028047251"/>
+<property name="_COMPARETO_PASS_RATE" value="95.0"/>
+<property name="_COMPARETO_RESULT" value="0"/>
+<property name="_COMPARETO_TEMPLATE" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\templates\kintone\3dot_icon\3dot_icon1366_768.PNG"/>
+<property name="_COMPARETO_TEMPLATE_HEIGHT" value="38"/>
+<property name="_COMPARETO_TEMPLATE_WIDTH" value="48"/>
+<property name="_COMPARETO_TIME_IN_MS" value="1168"/>
+<property name="_CURDATE" value="2019/10/26 3:27:27"/>
+<property name="_CURDATE_FORMAT" value="HH:mm:ss"/>
+<property name="_CURTIME" value="1572028047255"/>
+<property name="_DATE" value="20191026"/>
+<property name="_DESKTOP_HEIGHT" value="768"/>
+<property name="_DESKTOP_WIDTH" value="1366"/>
+<property name="_DISPLAY_COUNT" value="1"/>
+<property name="_DISPLAY_H_1" value="768"/>
+<property name="_DISPLAY_W_1" value="1366"/>
+<property name="_DISPLAY_X_1" value="0"/>
+<property name="_DISPLAY_Y_1" value="0"/>
+<property name="_ENV_=::" value="::\"/>
+<property name="_ENV_=C:" value="C:\Program Files (x86)\HeartCore\Robo"/>
+<property name="_ENV_ALLUSERSPROFILE" value="C:\ProgramData"/>
+<property name="_ENV_APPDATA" value="C:\Users\vantagepoint-RPA専用PC\AppData\Roaming"/>
+<property name="_ENV_COMPUTERNAME" value="LAPTOP-13IMTTML"/>
+<property name="_ENV_ComSpec" value="C:\WINDOWS\system32\cmd.exe"/>
+<property name="_ENV_CommonProgramFiles" value="C:\Program Files\Common Files"/>
+<property name="_ENV_CommonProgramFiles(x86)" value="C:\Program Files (x86)\Common Files"/>
+<property name="_ENV_CommonProgramW6432" value="C:\Program Files\Common Files"/>
+<property name="_ENV_DriverData" value="C:\Windows\System32\Drivers\DriverData"/>
+<property name="_ENV_FPS_BROWSER_APP_PROFILE_STRING" value="Internet Explorer"/>
+<property name="_ENV_FPS_BROWSER_USER_PROFILE_STRING" value="Default"/>
+<property name="_ENV_HOMEDRIVE" value="C:"/>
+<property name="_ENV_HOMEPATH" value="\Users\vantagepoint-RPA専用PC"/>
+<property name="_ENV_LOCALAPPDATA" value="C:\Users\vantagepoint-RPA専用PC\AppData\Local"/>
+<property name="_ENV_LOGONSERVER" value="\\LAPTOP-13IMTTML"/>
+<property name="_ENV_MYSWITCH" value="/c"/>
+<property name="_ENV_NUMBER_OF_PROCESSORS" value="4"/>
+<property name="_ENV_OS" value="Windows_NT"/>
+<property name="_ENV_OneDrive" value="C:\Users\vantagepoint-RPA専用PC\OneDrive"/>
+<property name="_ENV_PATHEXT" value=".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC"/>
+<property name="_ENV_PROCESSOR_ARCHITECTURE" value="AMD64"/>
+<property name="_ENV_PROCESSOR_IDENTIFIER" value="Intel64 Family 6 Model 78 Stepping 3, GenuineIntel"/>
+<property name="_ENV_PROCESSOR_LEVEL" value="6"/>
+<property name="_ENV_PROCESSOR_REVISION" value="4e03"/>
+<property name="_ENV_PROMPT" value="$P$G"/>
+<property name="_ENV_PSModulePath" value="C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules"/>
+<property name="_ENV_PUBLIC" value="C:\Users\Public"/>
+<property name="_ENV_Path" value="C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Amazon\AWSCLI\bin\;C:\Users\vantagepoint-RPA専用PC\AppData\Local\Microsoft\WindowsApps;"/>
+<property name="_ENV_ProgramData" value="C:\ProgramData"/>
+<property name="_ENV_ProgramFiles" value="C:\Program Files"/>
+<property name="_ENV_ProgramFiles(x86)" value="C:\Program Files (x86)"/>
+<property name="_ENV_ProgramW6432" value="C:\Program Files"/>
+<property name="_ENV_SESSIONNAME" value="Console"/>
+<property name="_ENV_SystemDrive" value="C:"/>
+<property name="_ENV_SystemRoot" value="C:\WINDOWS"/>
+<property name="_ENV_TEMP" value="C:\Users\VANTAG~1\AppData\Local\Temp"/>
+<property name="_ENV_TMP" value="C:\Users\VANTAG~1\AppData\Local\Temp"/>
+<property name="_ENV_USERDOMAIN" value="LAPTOP-13IMTTML"/>
+<property name="_ENV_USERDOMAIN_ROAMINGPROFILE" value="LAPTOP-13IMTTML"/>
+<property name="_ENV_USERNAME" value="vantagepoint-RPA専用PC"/>
+<property name="_ENV_USERPROFILE" value="C:\Users\vantagepoint-RPA専用PC"/>
+<property name="_ENV_configsetroot" value="C:\WINDOWS\ConfigSetRoot"/>
+<property name="_ENV_windir" value="C:\WINDOWS"/>
+<property name="_EXECUTION_SPEED_FACTOR" value="1.0"/>
+<property name="_EXIT_CMP_ARGUMENT" value="kintone\3dot_icon"/>
+<property name="_EXIT_CMP_LINE" value="76"/>
+<property name="_EXIT_CMP_NAME" value="click"/>
+<property name="_EXIT_CMP_PARAMS" value="click image passrate=90 template=kintone\3dot_icon"/>
+<property name="_EXIT_CMP_SCRIPT" value="KintoneUpload.tpr"/>
+<property name="_EXIT_CMP_TEMPLATES" value="kintone\3dot_icon\3dot_icon.PNG;kintone\3dot_icon\3dot_icon1366_768.PNG"/>
+<property name="_EXIT_CMP_TEMPLATE_SIZES" value="63x36;48x38"/>
+<property name="_EXIT_CODE" value="1"/>
+<property name="_EXIT_DESC" value="'search2'メソッドを使ったオブジェクト検索に失敗しました。"/>
+<property name="_EXIT_FILE" value="KintoneUpload.tpr"/>
+<property name="_EXIT_LINE" value="76"/>
+<property name="_EXIT_SCREENSHOT" value="exitState.png"/>
+<property name="_FILE" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\classes\HBinput__B223e67d61233bb30.java"/>
+<property name="_FILENAME" value="HBinput__B223e67d61233bb30.java"/>
+<property name="_FILE_FILE" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\result\URL.txt"/>
+<property name="_FILE_FILENAME" value="URL.txt"/>
+<property name="_FILE_LENGTH" value="32"/>
+<property name="_FILE_LINE_COLUMN" value="1"/>
+<property name="_FILE_LINE_COUNT" value="1"/>
+<property name="_FILE_LINE_LENGTH" value="31"/>
+<property name="_FILE_LINE_NUMBER" value="1"/>
+<property name="_FILE_LINE_TEXT" value="https://vp-rpa.cybozu.com/k/11/"/>
+<property name="_FILE_READ" value="https://vp-rpa.cybozu.com/k/11/"/>
+<property name="_FPS" value=";"/>
+<property name="_FS" value="\"/>
+<property name="_INSTALL_DIR" value="C:\Program Files (x86)\HeartCore\Robo"/>
+<property name="_LAST_CMP_COMMAND" value="Click &quot;image&quot; passrate=&quot;90&quot; template=&quot;kintone\3dot_icon&quot;"/>
+<property name="_MACHINE" value="localhost"/>
+<property name="_MOUSE_X" value="763"/>
+<property name="_MOUSE_Y" value="640"/>
+<property name="_PORT" value=""/>
+<property name="_PRODUCT_HOME_PAGE" value="http://www.heartcorerobo.com/hcrobodesktop.html"/>
+<property name="_PRODUCT_INSTALL_DIR" value="C:\Program Files (x86)\HeartCore\Robo"/>
+<property name="_PRODUCT_NAME" value="HeartCore Robo Desktop"/>
+<property name="_PRODUCT_VERSION_LONG" value="5.0.2-20190417.1"/>
+<property name="_PRODUCT_VERSION_SHORT" value="5.0.2"/>
+<property name="_PROJECT_DIR" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl"/>
+<property name="_PROJECT_REPORT_DIR" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\reports"/>
+<property name="_PROJECT_REPORT_UNIQUE_DIR" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\reports\WebCrawlMain.tpr_1572028047251.be722"/>
+<property name="_PROJECT_TEMPLATE_DIR" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\templates"/>
+<property name="_PROTOCOL" value=""/>
+<property name="_RANDOM" value="80620"/>
+<property name="_RANDOM_MAX" value="100000"/>
+<property name="_RANDOM_MIN" value="0"/>
+<property name="_REPORT_DIR" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\reports\WebCrawlMain.tpr_1572028047251.be722"/>
+<property name="_REPORT_FILE" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\reports\WebCrawlMain.tpr_1572028047251.be722\results.xml"/>
+<property name="_REPORT_FILENAME" value="results.xml"/>
+<property name="_REPORT_FILENAME_1" value="results.xml"/>
+<property name="_REPORT_FILENAME_XML" value="results.xml"/>
+<property name="_REPORT_FILE_1" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\reports\WebCrawlMain.tpr_1572028047251.be722\results.xml"/>
+<property name="_REPORT_FILE_RELATIVE" value="WebCrawlMain.tpr_1572028047251.be722\results.xml"/>
+<property name="_REPORT_FILE_RELATIVE_1" value="WebCrawlMain.tpr_1572028047251.be722\results.xml"/>
+<property name="_REPORT_FILE_RELATIVE_XML" value="WebCrawlMain.tpr_1572028047251.be722\results.xml"/>
+<property name="_REPORT_FILE_XML" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\reports\WebCrawlMain.tpr_1572028047251.be722\results.xml"/>
+<property name="_REPORT_STATUS_IMAGE_NAME" value="currentstate.jpg"/>
+<property name="_RGB" value="000000"/>
+<property name="_RGB_X" value="0"/>
+<property name="_RGB_Y" value="0"/>
+<property name="_SCRIPT_DIR" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\src\scripts"/>
+<property name="_SEARCH_MATCH_COUNT" value="0"/>
+<property name="_SEARCH_X" value="-1"/>
+<property name="_SEARCH_X_1" value="103"/>
+<property name="_SEARCH_X_2" value="103"/>
+<property name="_SEARCH_Y" value="-1"/>
+<property name="_SEARCH_Y_1" value="105"/>
+<property name="_SEARCH_Y_2" value="441"/>
+<property name="_SEQNO" value="780066"/>
+<property name="_SERVER_CLIPBOARD_CONTENT" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\result\hreflist.txt"/>
+<property name="_SERVER_CLIPBOARD_CONTENT_TEXT" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\result\hreflist.txt"/>
+<property name="_STACK" value=""/>
+<property name="_STEP_SUMMARY" value=""/>
+<property name="_TEMPLATE_DIR" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\templates"/>
+<property name="_THREAD_NAME" value="WebCrawlMain.tpr"/>
+<property name="_TIME" value="032727"/>
+<property name="_TIMEOUT" value="true"/>
+<property name="_URL" value="java://localhost"/>
+<property name="_WARNING_COUNT" value="0"/>
+<property name="aaa" value="ccc"/>
+<property name="aaaaa" value="fullPathDir"/>
+<property name="capture" value=""/>
+<property name="check_detail" value="mynavi"/>
+<property name="check_detail1" value="&quot;MT-S&quot;"/>
+<property name="check_status" value=""/>
+<property name="dirname" value="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl"/>
+<property name="kintone_upload" value=""/>
+<property name="new_or_all" value=""/>
+<property name="number_pages" value="208"/>
+<property name="option_btn" value="0"/>
+<property name="path_href_file" value="C:/Users/vantagepoint-RPA専用PC/Desktop/VP_WebCrawl\result\HB.csv"/>
+<property name="path_url_page" value="view-source:https://tenshoku.mynavi.jp/search/list/?pageNum=3"/>
+<property name="result" value="1"/>
+<property name="test1" value="mynavi.csv"/>
+<property name="test22" value="C:/Users/vantagepoint-RPA専用PC/Desktop/VP_WebCrawl"/>
+<property name="test3" value="29"/>
+<property name="web_site" value="mynavi"/>
+</properties>
+<result>
+<code>1</code>
+<desc>'search2'メソッドを使ったオブジェクト検索に失敗しました。</desc>
+<script>KintoneUpload.tpr</script>
+<line>76</line>
+<exitscreen link="exitState.png">exitState.png</exitscreen>
+<failed cname="CLICK" command="click image passrate=90 template=kintone\3dot_icon" script="KintoneUpload.tpr" line="76">
+<template link="kintone/3dot_icon/3dot_icon.PNG" width="63" height="36">kintone\3dot_icon\3dot_icon.PNG</template>
+<template link="kintone/3dot_icon/3dot_icon1366_768.PNG" width="48" height="38">kintone\3dot_icon\3dot_icon1366_768.PNG</template>
+</failed>
+<stack>
+<location relpath="tpr\WebCrawlMain.tpr" path="C:\Users\vantagepoint-RPA専用PC\Desktop\VP_WebCrawl\tpr\WebCrawlMain.tpr" line="107" command="Run &quot;{_PROJECT_DIR}\tpr\kintone\KintoneUpload.tpr&quot;"/>
+</stack>
+</result>
+</testsuite>

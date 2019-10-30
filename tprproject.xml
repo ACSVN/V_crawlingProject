@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><tprproject>
-<date>28-08-19 22:08</date>
-<uid>p16cd857f8ec</uid>
+<date>18-09-19 10:29</date>
+<uid>p16d41fcd249</uid>
 <ver>1</ver>
 <paths>
 <reports>reports</reports>
@@ -10,7 +10,7 @@
 <stype2>src</stype2>
 <sotype2>classes</sotype2>
 </paths>
-<tver>5.0.5-20190816.1</tver>
-<lastmod>12-09-19 13:17</lastmod>
-<editors>tpr\kintone\KintoneUpload.tpr;tpr\rikunabi\rikunabiPngEdit.tpr;tpr\HBinput.tpr;tpr\S3\S3upload.tpr;tpr\HTTrack\HTTrack.tpr;tpr\mynavi\savepagesource.tpr;tpr\mynavi\mynavi.tpr;tpr\rikunabi\rikunabi.tpr</editors>
+<tver>5.0.2-20190417.1</tver>
+<lastmod>26-10-19 03:44</lastmod>
+<editors>tpr\WebCrawlMain.tpr;tpr\doda\DodaGetHreflist.tpr;tpr\kintone\KintoneUpload.tpr;src\mynavi\GetHref.java;tpr\mynavi\mynavi.tpr;tpr\mynavi\savepagesource.tpr;tpr\HTTrack\HTTrack.tpr;src\HTTrack\edittext.java;tpr\S3\S3upload.tpr;tpr\HBinput.tpr;src\mynavi\OutputFileCreate.java;tpr\rikunabi\rikunabi.tpr</editors>
 </tprproject>

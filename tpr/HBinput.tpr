@@ -1,11 +1,9 @@
+Var result="1"
 Procedure func_review {
     Var result=""
     Var error=""
     Var check_status=""
     Var dir={_PROJECT_DIR}
-    //Var web_site="doda"
-    //Var web_site="mynavi"
-    //Var web_site="rikunabi"
     Var inputfile="{web_site}.csv"
     Var outputfile="{web_site}HB.csv"
 }
@@ -35,11 +33,8 @@ Procedure cmdOperation {
 Var error=""
 Var check_status=""
 Var dir=""
-//Var web_site
-//Var web_site="mynavi"
 Var web_name={web_site}
 Var inputfile=""
-//Var outputfile=""
 Var test1=""
 Var test2=""
 Var test3=""
@@ -58,11 +53,8 @@ cmdOperation ".quit"
 cmdOperation "exit"
 
 Log {inputfile}
-//Run "..\src\scripts\ExecuteDB.java"
-//Run "..\src\scripts\ExecuteCSV.java"
-//Run "..\src\scripts\ExecuteCompare.java"
 func_review
-Run "..\src\scripts\NoseTest.java"
+Run "..\src\scripts\NoseTest.java" db_name="{db_name}" quoc.db="{quoc.db}" _PROJECT_DIR="{_PROJECT_DIR}" file_name="{file_name}" table_result="{table_result}" path_db="{path_db}" web_name="{web_name}" dir_path="{dir_path}"
 
 Log {test1}
 Log {test2}
@@ -78,7 +70,6 @@ func_review
 java {
     import java.io.*;
     String projectdir_tpr = getVariableAsString("_PROJECT_DIR") + "\\result\\";
-    //String website_tpr = getVariableAsString("web_site");
     String original_csv = projectdir_tpr + "HB.csv";         // 元々のcsvファイル
     String noBOM_csv = projectdir_tpr + "HB_noBOM.csv";  // noBOMに貼り付けるためのcsvファイル(このスクリプトの成果物！！)
 
@@ -86,7 +77,6 @@ java {
         BufferedReader br_original_csv = new BufferedReader(new InputStreamReader(new FileInputStream(original_csv),"UTF-8"));
         FileWriter f;
         PrintWriter pw_noBOM_csv;
-//        BufferedReader print_writer_csv = new BufferedReader(new InputStreamReader(new FileInputStream(original_csv),"UTF-8"));
 
         String line1 = "";
         String line2 = "";
@@ -143,4 +133,4 @@ java {
 
 // BOMの削除、ここまで
 
-//Run "kintone\kintoneUpload.tpr" web_site="{web_site}"
+Var result="0"
