@@ -10,7 +10,7 @@
 <stype2>src</stype2>
 <sotype2>classes</sotype2>
 </paths>
-<tver>5.0.2-20190417.1</tver>
-<lastmod>26-10-19 03:44</lastmod>
-<editors>tpr\WebCrawlMain.tpr;tpr\doda\DodaGetHreflist.tpr;tpr\kintone\KintoneUpload.tpr;src\mynavi\GetHref.java;tpr\mynavi\mynavi.tpr;tpr\mynavi\savepagesource.tpr;tpr\HTTrack\HTTrack.tpr;src\HTTrack\edittext.java;tpr\S3\S3upload.tpr;tpr\HBinput.tpr;src\mynavi\OutputFileCreate.java;tpr\rikunabi\rikunabi.tpr</editors>
+<tver>5.0.5-20190816.1</tver>
+<lastmod>20-11-19 11:34</lastmod>
+<editors>tpr\func\chrome.tpr;tpr\util\webcrawl.tpr;tpr\util\kintone.tpr;tpr\util\HTTrack.tpr;tpr\main\main_HTTrack.tpr;tpr\util\input.tpr;tpr\main\main_webcrawl.tpr;tpr\main.tpr;tpr\main\main_kintone.tpr;tpr\func\image.tpr;tpr\func\cmd.tpr;tpr\main\main_HBinput.tpr</editors>
 </tprproject>

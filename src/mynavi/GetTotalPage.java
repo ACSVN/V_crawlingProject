@@ -23,50 +23,50 @@ import org.jsoup.select.Elements;
 
 public class GetTotalPage extends DefaultJavaTestScript  {
 
-   public void test() {
-       
-      try {
-          String url_item = getContext().getVariableAsString("url_web");
-          String class_total = getContext().getVariableAsString("class_total");
-          String case_display = getContext().getVariableAsString("case_display");
-          String replace_nxt_p = getContext().getVariableAsString("replace_nxt_p");
-          
-          int total_page = 0;
-          int dis_case = Integer.parseInt(case_display);
-          Document doc = Jsoup.connect(url_item).get();
-          String charset = doc.charset().toString();
-          
-          String total_url = doc.select(class_total).first().text();
-         
-          total_url = total_url.replace(replace_nxt_p, "");
-          
-          int total_q = Integer.parseInt(total_url);
-        
-          if(total_q <= dis_case){
-              total_page  = 1;
-          }else if(total_q%dis_case == 0){
-              total_page  = total_q/dis_case;
-          }else{
-              total_page  = (total_q/dis_case)+1;
-          }
+    public void test() {
+
+        try {
+            String url_item = getContext().getVariableAsString("url_web");
+            String class_total = getContext().getVariableAsString("class_total");
+            String case_display = getContext().getVariableAsString("case_display");
+            String replace_nxt_p = getContext().getVariableAsString("replace_nxt_p");
+
+            int total_page = 0;
+            int dis_case = Integer.parseInt(case_display);
+
+            Document doc = Jsoup.connect(url_item).get();
+            String charset = doc.charset().toString();
+
+            String total_url = doc.select(class_total).first().text();
+
+            total_url = total_url.replace(replace_nxt_p, "");
+
+            int total_q = Integer.parseInt(total_url);
+
+            if (total_q <= dis_case) {
+                total_page  = 1;
+            } else if (total_q % dis_case == 0) {
+                total_page = total_q/dis_case;
+            } else {
+                total_page = (total_q / dis_case) + 1;
+            }
             getContext().setVariable("number_pages", total_page);
-      } catch (StopRequestException ex) {
-         getContext().setVariable("number_pages", 0);
-         throw ex;
-      }catch (IOException ex) {
-          ex.printStackTrace();
-          getContext().setVariable("number_pages",0);
-          throw new IllegalStateException(ex);
-      }
-      
-   }
-   
+        } catch (StopRequestException ex) {
+            getContext().setVariable("number_pages", 0);
+            throw ex;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            getContext().setVariable("number_pages",0);
+            throw new IllegalStateException(ex);
+        }
+    }
+
    public  boolean isNullOrEmpty(String str) {
         if(str == null || str.isEmpty() || str == "" || str.equals("null"))
             return true;
         return false;
     }
-   
+
    public static void main(String args[]) {
       GetTotalPage script = new GetTotalPage();
       ApplicationSupport robot = new ApplicationSupport();

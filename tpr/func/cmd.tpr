@@ -1,0 +1,15 @@
+# Procedure definition.
+Procedure func_cmd_open {
+    Press "Windows+R" wait="2s"
+    Paste "cmd"
+    Press "Enter"
+}
+
+
+# Procedure definition.
+# Expected Parameters are:
+# {1} ... command
+Procedure func_cmd_operate {
+    Paste "{1}" wait="1s"
+    Press "Enter"
+}

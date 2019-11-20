@@ -22,18 +22,18 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
 
     public void test() {
         try {
-        
+
             String web_name = getContext().getVariableAsString("web_name");
-        
+
             //Get directory project
             String path = getContext().getVariableAsString("_PROJECT_DIR");
             String fullPathDir = URLDecoder.decode(path, "UTF-8");
             fullPathDir = fullPathDir.replace("\\", "/");
             getContext().setVariable("test22", fullPathDir);
-            
+
             //DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
             //Date date = new Date();
-            
+
             //String path_href_report = fullPathDir + "/result_mynavi/" + dateFormat.format(date) + "_hreflist.csv";
             String path_href_report = fullPathDir + "/result/hreflist.csv";
             this.deleteCreateNewFile(path_href_report);
@@ -44,7 +44,7 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
                 add("Rank");
             }};
             this.writeTemplateFile(path_href_report, title_href);
-            
+
             //String path_file_data_result = fullPathDir + "/result_mynavi/" + dateFormat.format(date) + "_result_" + web_name + ".csv";
             String path_file_data_result = fullPathDir + "/result/" + web_name + ".csv";
             this.deleteCreateNewFile(path_file_data_result);
@@ -68,7 +68,7 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
                 add("サイト名");
             }};
             this.writeTemplateFile(path_file_data_result, title_result);
-            
+
             //create file contains href get content empty with jsoup
             String path_href_empty =  fullPathDir + "/result/href_empty.csv";
             this.deleteCreateNewFile(path_href_empty);
@@ -78,12 +78,12 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
                 add("Href");
             }};
             this.writeTemplateFile(path_href_empty, href_empty);
-            
+
         } catch (IOException ex) {
             getContext().setVariable("check_status", "deleteCreateNewFile. java function test error. " + ex.toString());
         }
     }
-    
+
     public void deleteCreateNewFile(String dir_path){
         try{
             File file = new File(dir_path);
@@ -96,7 +96,7 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
             getContext().setVariable("check_status", "deleteCreateNewFile.java. deleteCreateNewFile Create new file csv error. " + e.toString());
         }
     }
-    
+
     public void writeTemplateFile(String path_file, ArrayList<String> title_header){
         try{
             File in = new File(path_file);
@@ -111,9 +111,9 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
             os.write(239);
             os.write(187);
             os.write(191);
-            
+
             out = new PrintWriter(new OutputStreamWriter(os, "UTF-8"));
-            
+
             for(int i = 0; i < title_header.size(); i++){
                 out.print('"' + title_header.get(i) + '"');
                 if(i == title_header.size()-1){
@@ -121,7 +121,7 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
                 }else{
                     out.print(",");
                 }
-                
+
             }
             out.flush();
             out.close();
@@ -130,7 +130,7 @@ public class OutputFileCreate extends DefaultJavaTestScript  {
             getContext().setVariable("check_status", "OutputFileCreate.java function writeTemplateFile error. IOException: " + e.toString());
         }
     }
-   
+
     public static void main(String args[]) {
         OutputFileCreate script = new OutputFileCreate();
         ApplicationSupport robot = new ApplicationSupport();

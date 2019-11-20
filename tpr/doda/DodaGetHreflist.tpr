@@ -1,3 +1,23 @@
+Procedure doda_createDirectoryTxt {
+    Press Windows+r wait=1s
+    Paste "cmd" wait=1s
+    Press Enter wait=1s
+    Paste "cd {_PROJECT_DIR}\result\ " wait=1s
+    Press Enter wait=1s
+    Paste "echo {_PROJECT_DIR}> directory.txt" wait=1s
+    Press Enter wait=1s
+    Paste "echo doda> web_site.txt" wait=1s
+    Press Enter wait=1s
+    Paste "exit" wait=1s
+    Press Enter wait=1s
+}
+
+Procedure doda_accessChrome {
+    Press Windows+r wait=1s
+    Paste "chrome.exe https://doda.jp/DodaFront/View/JobSearchList.action?did=T000exit001&charset=SHIFT-JIS&fktt=4&kk=2&sid=TopSearch" wait=1s
+    Press Enter wait=1s
+}
+
 //190618 made by s.kodama
 //dodaにアクセスし、リストページから企業詳細ページのURLを取得します。
 Var check_detail=""
@@ -8,23 +28,10 @@ Var i=0
 Var result="1"
 
 //directory.txtを作成
-Press Windows+r wait=1s
-Paste "cmd" wait=1s
-Press Enter wait=1s
-Paste "cd {_PROJECT_DIR}\result\ " wait=1s
-Press Enter wait=1s
-Paste "echo {_PROJECT_DIR}> directory.txt" wait=1s
-Press Enter wait=1s
-Paste "echo doda> web_site.txt" wait=1s
-Press Enter wait=1s
-Paste "exit" wait=1s
-Press Enter wait=1s
-//directry.txtの作成、ここまで
+doda_createDirectoryTxt
 
-
-Press Windows+r wait=1s
-Paste "chrome.exe https://doda.jp/DodaFront/View/JobSearchList.action?did=T000exit001&charset=SHIFT-JIS&fktt=4&kk=2&sid=TopSearch" wait=1s
-Press Enter wait=1s
+// Chromeへアクセス
+doda_accessChrome
 
 Wait 5s
 
@@ -34,17 +41,17 @@ java {
     import java.io.BufferedWriter;
     import java.io.PrintWriter;
     import java.io.IOException;
-    
+
     import org.jsoup.Jsoup;
     import org.jsoup.helper.Validate;
     import org.jsoup.nodes.*;
     import org.jsoup.select.Elements;
-    
+
     String dir_path = getContext().getVariableAsString("_PROJECT_DIR");
 
-    
+
     int kcnt=1,cnt=1; //finally避けの代入。本来の値はfor文の初期条件式
-    boolean first = true;    
+    boolean first = true;
     boolean endFlag = false;
     try {
 
@@ -60,7 +67,7 @@ java {
             f = new FileWriter(dir_path +"\\result\\hreflist.csv", true);
         }
         PrintWriter p = new PrintWriter(new BufferedWriter(f));
-   
+
         //アクセスするべきurlを取得する
         String url;
         //kcntが1のときはTopShearchに、1以外の時はページ数を指定してアクセスする
@@ -87,11 +94,11 @@ java {
 
             //クラス名が"_JobListToDetail"になっているhref（＝企業詳細ページリンク）を取得
             Elements elemHTML = docHTML.getElementsByClass("_JobListToDetail").select("[href]");
-                    
+
            //取得したhrefデータを個別に確認して出力する
            cnt=1;
            String sameHTML="";
-           for (Element eleHTML: elemHTML) {            
+           for (Element eleHTML: elemHTML) {
              if(!eleHTML.attr("href").equals(sameHTML)){
                 p.print(eleHTML.attr("href").replace("/-tab__pr/","/-tab__jd/"));
                 p.print(",");
@@ -110,15 +117,15 @@ java {
                    endFlag=true;
           }
           //1行の登録が終わったら、一度csvファイルを閉じる
-          p.close();              
+          p.close();
    }
 
    } catch (StopRequestException ex) {
                   throw ex;
-   } catch (IOException ex) {       
+   } catch (IOException ex) {
          ex.printStackTrace();
         throw new IllegalStateException(ex);
-   }   
+   }
 } endjava
 
 //次のスクリプトに引継ぎ

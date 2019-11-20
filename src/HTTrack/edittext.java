@@ -21,58 +21,42 @@ import java.io.PrintWriter;
 
 public class edittext extends DefaultJavaTestScript  {
 
-   public void test() {
-       //File file = new File("");
-//FileReader filereader = new FileReader(file);
-       
-       //String dirname = getVariableAsString("dir"); 
-       String dirname = getVariableAsString("_PROJECT_DIR"); 
+    public void test() {
 
-       String web_site = getVariableAsString("web_site"); 
-    
-    getContext().setVariable("dirname", dirname);
-    getContext().setVariable("check_detail", web_site);
-    
-    String filename = dirname + "\\result\\hreflist.csv"; 
-    if(web_site.equals("doda")){
-        filename = dirname + "\\result\\doda.csv";
-        getContext().setVariable("result2", filename);
-    }else if(web_site.equals("rikunabi")){
-        filename = dirname + "\\result\\rikunabi.csv";
-    }
-    String outputname = dirname + "\\result\\hreflist.txt"; 
+        String dirname = getVariableAsString("_PROJECT_DIR");
+        String web_site = getVariableAsString("web_site");
+        String filename = dirname + "\\result\\hreflist.csv";
 
-    try {
-        getContext().setVariable("aaa", "aaa");
-        BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
-        getContext().setVariable("aaa", "bbb");
-       // PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(outputname)));
-        PrintWriter pw = new PrintWriter(new FileWriter(new File(outputname)));
-        getContext().setVariable("aaa", "ccc");
-                
-        String line = "";
-        boolean first = true;
-           // int i=0;//test
-            while ((line = br.readLine()) != null) {
-               // i=i+1;//test
-               // if(i==5)break;//test
-            String array[] = line.split(","); 
-            if (first) {
-                first = false;  
-            } else {
-                pw.println(array[0]);  
-            }
+        if (web_site.equals("doda")) {
+            filename = dirname + "\\result\\doda.csv";
+        } else if (web_site.equals("rikunabi")) {
+            filename = dirname + "\\result\\rikunabi.csv";
         }
-        br.close();
-        pw.close();
+        String outputname = dirname + "\\result\\hreflist.txt";
 
-    } catch (FileNotFoundException e) {
-        getContext().setVariable("result", "99");
-    } catch (IOException e) {
-        getContext().setVariable("result", "999");
-}
-   }
-   
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
+            PrintWriter pw = new PrintWriter(new FileWriter(new File(outputname)));
+
+            String line = "";
+            boolean first = true;
+            while ((line = br.readLine()) != null) {
+                String array[] = line.split(",");
+                if (first) {
+                    first = false;
+                } else {
+                    pw.println(array[0]);
+                }
+            }
+            br.close();
+            pw.close();
+        } catch (FileNotFoundException e) {
+            getContext().setVariable("result", "99");
+        } catch (IOException e) {
+            getContext().setVariable("result", "999");
+        }
+    }
+
    public static void main(String args[]) {
       edittext script = new edittext();
       ApplicationSupport robot = new ApplicationSupport();
