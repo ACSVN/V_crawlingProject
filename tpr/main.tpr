@@ -32,12 +32,7 @@ Var total_click_search=""
 Var class_main_office=""
 Var class_remark=""
 
-
-# コンソール画面(Webクロール条件の選択)
-Run "{_PROJECT_DIR}\src\scripts\SelectOrder.java"
-Log "{web_site}"
-
-# ウェブクローリング
+# サイト選択＆ウェブクローリング
 main_webcrawl
 
 # HTTrack
@@ -45,9 +40,9 @@ main_HTTrack
 
 # S3アップロード
 main_S3upload
-
-# HBインプット
-main_HBinput
-
-# Kintoneアップロード
-main_kintone
+//
+//# HBインプット
+//main_HBinput
+//
+//# Kintoneアップロード
+//main_kintone

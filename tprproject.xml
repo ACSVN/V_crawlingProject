@@ -11,6 +11,6 @@
 <sotype2>classes</sotype2>
 </paths>
 <tver>5.0.5-20190816.1</tver>
-<lastmod>20-11-19 11:34</lastmod>
-<editors>tpr\func\chrome.tpr;tpr\util\webcrawl.tpr;tpr\util\kintone.tpr;tpr\util\HTTrack.tpr;tpr\main\main_HTTrack.tpr;tpr\util\input.tpr;tpr\main\main_webcrawl.tpr;tpr\main.tpr;tpr\main\main_kintone.tpr;tpr\func\image.tpr;tpr\func\cmd.tpr;tpr\main\main_HBinput.tpr</editors>
+<lastmod>28-11-19 18:10</lastmod>
+<editors>tpr\util\selectWeb.tpr;tpr\main.tpr;src\scripts\SelectOrder.java</editors>
 </tprproject>

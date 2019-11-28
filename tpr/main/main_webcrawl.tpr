@@ -1,8 +1,6 @@
 Include "..\util\input.tpr"
-Include "..\util\webcrawl.tpr"
-Include "..\func\chrome.tpr"
 
-# Procedure definition
+# Procedure definition.
 Procedure main_webcrawl {
 
     File "open" file="{_PROJECT_DIR}\input.csv" id="id1"
@@ -10,62 +8,10 @@ Procedure main_webcrawl {
     # csvファイルを読み込む
     input_csv
 
-    # Google Chromeを起動
-    func_chrome_open
-
-    # URL検索
-    func_chrome_search "{url}"
-
-    # Google ChromeのURLからトータルページ数を取得
-    Wait "1s"
-    func_chrome_getURL
-
-    # {number_pages}を取得
-    Run "{_PROJECT_DIR}\src\mynavi\GetTotalPage.java"
-
-    # outputfileを作成する
-    Run "{_PROJECT_DIR}\src\mynavi\OutputFileCreate.java"
-
-    # ページ数が1ページより大きい場合はループ
-    if ({number_pages} > 1) {
-       for (j=1; {j}<={number_pages}; j={j}+1) {
-            String replace "{url_web}" string="jobsearchType=4&searchType=8" replacement=""
-            Var path_url_page="view-source:{_STRING}?pageNum={j}"
-
-            Press "Ctrl+T"
-            func_webcrawl_loadCheck
-            Paste "{path_url_page}" wait="1s"
-            Press "Enter" wait="5s"
-
-            # 既存のページデータがあれば削除
-            func_webcrawl_deleteExistedFiles
-
-            # ページデータを保存
-            func_chrome_savepage "{_PROJECT_DIR}\tmp_html_file\temp.html"
-
-            #ページ保存ができたか確認
-            func_webcrawl_check
-
-            # ページ保存ができた後の処理
-            Var page_item={j}
-            func_webcrawl_afterSaving
-        }
-    } else {
-        # 既存のページデータがあれば削除
-        func_webcrawl_deleteExistedFiles
-
-        # ページデータを保存
-        func_chrome_savepage "{_PROJECT_DIR}\tmp_html_file\temp.html"
-
-        # ページ保存ができたか確認
-        func_webcrawl_check
-
-        # ページ保存ができた後の処理
-        Var page_item=1
-        func_webcrawl_afterSaving
-    }
-
-    Press "Ctrl+Shift+W"
-
     File "close" save="false" id="id1"
+
+    # javaでウェブクロール
+    Press "Windows+R"
+    Paste "{_PROJECT_DIR}\tmp_files\test-VP2\start.bat"
+    Press "Enter"
 }

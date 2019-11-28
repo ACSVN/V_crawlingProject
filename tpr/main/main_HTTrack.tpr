@@ -15,12 +15,6 @@ Procedure main_HTTrack {
     # "worktime.txt"を作成
     Exec "cmd.exe /C echo {maketime} > {_PROJECT_DIR}\result\worktime.txt"
 
-    # --------------------------------------------------------------------- #
-    # こんなところで"hreflist.txt"は作らず、webcrawl時にアウトプットする方が効率的 #
-    # --------------------------------------------------------------------- #
-    # Var dirname=""
-    # Run "{_PROJECT_DIR}\src\HTTrack\edittext.java"
-
     # HTTrackを開く
     func_HTTrack_open
 
