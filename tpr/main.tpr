@@ -1,0 +1,27 @@
+Include "main\main_webcrawl.tpr"
+Include "main\main_HTTrack.tpr"
+Include "main\main_S3upload.tpr"
+Include "main\main_HBinput.tpr"
+Include "main\main_kintone.tpr"
+
+# コンソールで使用される変数
+Var web=""
+Var new_or_all=""
+Var capture=""
+Var kintone_upload=""
+Var option_btn=""
+
+# サイト選択＆ウェブクローリング
+main_webcrawl
+
+# HTTrack
+main_HTTrack
+
+# S3アップロード
+main_S3upload
+//
+//# HBインプット
+//main_HBinput
+//
+//# Kintoneアップロード
+//main_kintone

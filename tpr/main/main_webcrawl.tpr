@@ -1,0 +1,32 @@
+Include "..\util\selectWeb.tpr"
+
+# Procedure definition.
+Procedure main_webcrawl {
+
+    # コンソールでウェブサイトの選択
+    func_selectWeb
+
+    # 外部jarファイルでウェブクロール
+    Press "Windows+R"
+    Paste "{_PROJECT_DIR}\jar\start.bat"
+    Press "Enter" wait="3s"
+
+    # ウェブクロールのサイトを自動入力
+    Paste "{web}"
+    Press "Enter" wait="1s"
+
+    # ディレクトリの手動設定の有無
+    Paste "N"
+    Press "Enter" wait="1s"
+
+    # ログファイル出力かコマンド上表示かの選択（視覚的に見れるのはコマンドの方です）
+    Paste "N"
+    Press "Enter"
+
+    Wait "90m"
+
+    # (終了をチェックする機構を入れる？)
+
+    # 終了時の動作
+    Press "Enter" wait="3s"
+}

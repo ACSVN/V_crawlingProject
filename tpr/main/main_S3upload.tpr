@@ -1,0 +1,33 @@
+//made by kodama 190903
+//このスクリプトは、AWS S3に接続するための動作の自動化を目的としています。
+//コマンドプロンプト上でのAWS CLIの使用を前提とします。（sync命令動作監視のため）
+//予め実行環境でインストール・各種設定をすること。
+//また、AWS S3にアクセスするためのAccessKey等の情報についても、予め「aws configure」で
+//設定されているものとします。
+
+// created new version ny AKira Nose 2019.11.20
+// changed for Object Oriented
+
+Include "..\func\cmd.tpr"
+
+
+# Procedure definition.
+Procedure main_S3upload {
+
+    # コマンドプロンプトを起動
+    func_cmd_open
+
+    # sync命令
+    func_cmd_operate "aws s3 sync C:\HTTrackLog\{web_site} s3://vp-web-crawl/{web_site}"
+    Press "Enter" wait="5s"
+
+    # sync命令が完了するまで待機
+    Waitfor "mismatch" method="search2" template="S3\cmdSyncWait" timeout="10m"
+
+    # コマンドプロンプトを終了
+    Wait "2s"
+    func_cmd_operate "exit"
+
+    # "kintone.csv"を作成
+    #Run "下のJava"
+}

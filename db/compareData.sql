@@ -1,0 +1,10 @@
+DELETE FROM WebTable WHERE rowid = 1;
+INSERT INTO TmpTable1 SELECT rowid, * FROM WebTable;
+INSERT INTO TmpTable2 SELECT p.id, p.URL, pp.corporateNumber, 9999, p.Title, p.CompanyName, p.Workplace, p.HeadOffice, p.PostalCode, p.Address, p.Recruiter, p.Phone, p.Fax, p.Email, p.Industry, p.Remarks, p.PostPeriod, p.Rank, p.Website FROM CorporateNumberTable as pp, TmpTable1 as p WHERE pp.name = p.CompanyName and substr(pp.postCode,1,3) <> substr(p.PostalCode,1,3) GROUP BY p.URL ORDER BY p.id;
+INSERT INTO TmpTable2 SELECT r.id, r.URL, r.CorporateNum, (SELECT count(*) FROM TmpTable2 as r1 WHERE r1.CompanyName = r.CompanyName and r1.PostalCode < r.PostalCode) + 1, r.Title, r.CompanyName, r.Workplace, r.HeadOffice, r.PostalCode, r.Address, r.Recruiter, r.Phone, r.Fax, r.Email, r.Industry, r.Remarks, r.PostPeriod, r.Rank, r.Website FROM TmpTable2 as r ORDER BY r.id;
+DELETE FROM TmpTable2 WHERE BranchNum = 9999;
+INSERT INTO TmpTable2 SELECT p.id, p.URL, pp.corporateNumber, 0, p.Title, p.CompanyName, p.Workplace, p.HeadOffice, p.PostalCode, p.Address, p.Recruiter, p.Phone, p.Fax, p.Email, p.Industry, p.Remarks, p.PostPeriod, p.Rank, p.Website FROM CorporateNumberTable as pp, TmpTable1 as p WHERE pp.name = p.CompanyName and substr(pp.postCode,1,3) = substr(p.PostalCode,1,3) GROUP BY p.URL ORDER BY p.id;
+INSERT INTO TmpTable2 SELECT p.id, p.URL, 99, 0, p.Title, p.CompanyName, p.Workplace, p.HeadOffice, p.PostalCode, p.Address, p.Recruiter, p.Phone, p.Fax, p.Email, p.Industry, p.Remarks, p.PostPeriod, p.Rank, p.Website FROM TmpTable1 as p WHERE NOT EXISTS(SELECT * FROM TmpTable2 as r WHERE p.id = r.id) GROUP BY p.URL ORDER BY p.id;
+INSERT INTO ResultTable SELECT URL, CorporateNum, BranchNum, Title, CompanyName, Workplace, HeadOffice, PostalCode, Address, Recruiter, Phone, Fax, Email, Industry, Remarks, PostPeriod, Rank, Website FROM TmpTable2 GROUP BY URL ORDER BY id;
+DROP TABLE TmpTable1;
+DROP TABLE TmpTable2;
