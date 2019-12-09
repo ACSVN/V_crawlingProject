@@ -1,32 +1,39 @@
+#
+# main script for executing "vp-2.0.0.jar" to get all job info
+# @author Akira Nose (ADDIX VIETNAM Co., Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
+
 Include "..\util\selectWeb.tpr"
+Include "..\func\image.tpr"
 
 # Procedure definition.
 Procedure main_webcrawl {
 
-    # コンソールでウェブサイトの選択
+    # Select website by using console
     func_selectWeb
 
-    # 外部jarファイルでウェブクロール
+    # web-crawling by using jar file (filename = \jar\vp-2.0.0.jar)
     Press "Windows+R"
     Paste "{_PROJECT_DIR}\jar\start.bat"
     Press "Enter" wait="3s"
 
-    # ウェブクロールのサイトを自動入力
+    # input website name (*auto)
     Paste "{web}"
     Press "Enter" wait="1s"
 
-    # ディレクトリの手動設定の有無
+    # select whether set directory on manual (*auto)
     Paste "N"
     Press "Enter" wait="1s"
 
-    # ログファイル出力かコマンド上表示かの選択（視覚的に見れるのはコマンドの方です）
+    # select whether export progress status for log file or display it on command (*auto)
     Paste "N"
     Press "Enter"
 
-    Wait "90m"
+    # Check whether web-crawling completed (ミスマッチでコマンドが消えるのを待つ）
+    Waitfor "mismatch" template="WebCrawl\01-complete"
 
-    # (終了をチェックする機構を入れる？)
-
-    # 終了時の動作
+    # After finish
     Press "Enter" wait="3s"
 }

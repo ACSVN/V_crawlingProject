@@ -1,53 +1,49 @@
+#
+# main script for this project
+# @author Akira Nose (ADDIX VIETNAM Co.,Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
+
 Include "..\func\chrome.tpr"
 Include "..\util\kintone.tpr"
 
 # Procedure definition.
 Procedure main_kintone {
 
-    # func_chrome_searchで新規タブを使わないために使用
+    # variable for "func_chrome_search"
     Var search_cnt=1
 
-    # Google Chromeを起動
+    # open Google Chrome
     func_chrome_open
 
-    # Kintoneにアクセス
+    # access kintone
     func_chrome_search "https://vp-rpa.cybozu.com/k/#/space/3"
 
-    # 再読み込みの画像が出ていたら抜けるループ
-    func_kintone_accessCheck
-    Wait "10s"
-
-    # ログインが必要な場合はログイン処理を行う
+    # login
     func_kintone_login "vprpa0906@gmail.com" "Vprpa0906"
-    Wait "1s"
 
-    # 顧客リストをクリック
-    func_kintone_clickCustomerList
+    # click "customer list"
+//    func_kintone_clickCustomerList
 
-
-    # 点３つのアイコンをクリック
-    Click "image" passrate="90" template="kintone\3dot_icon"
-    Click "image" template="kintone\read_by_file"
-    Click "image" template="kintone\refer_button" wait="5s"
-    Compareto "kintone\hiraku_check" method="search2"
-
-
-    //doda, rikunabi, mynaviで分岐
-    //190903児玉、HB.csvをHB_noBOM.csvに変更
-    # "HB_noBOM.csv"という名前でアップロード？
-    Paste "{_PROJECT_DIR}\result\HB_noBOM.csv" wait="0.5s"
+    # setting?
+    for (i=0; {i}<3; i={i}+1) {
+        Click "image" template="Kintone\02-setting\{i}"
+    }
+    Wait "5s"
+    
+    # check something?
+    Compareto "kintone\03-hiraku_check" method="search2"
+    
+    # upload "branch.csv" for kintone
+    Paste "{_PROJECT_DIR}\results\branch.csv" wait="1s"
     Press "Enter"
-
-
-    # ===== "kintone.csv"をアップロード ===== #
-
 
     Wait "0.5s"
     Press "Enter"
-
-    # データ量が大きい場合、ここの表示に時間がかかる
-    # よくわからない動作その１
-    func_kintone_funcNo1
+    
+    # check something?
+    Waitfor "match" template="Kintone\04-check_question"
 
     # もともと「はい」が選択されていれば処理なし。選択されていなければ選択
     func_kintone_selectYes
@@ -55,19 +51,17 @@ Procedure main_kintone {
     # 文字コードが"SHIFT-JIS"でなければ"SHIFT-JIS"にする
     func_kintone_charset
 
-    # 何かをクリックするらしい
-    Click "image" template="houzin2"
-    Click "image" template="edaban"
-    Click "image" template="edaban2"
+    # click something?
+    for (i=0; {i}<3; i={i}+1) {
+        Click "image" template="Kintone\07-branch\{i}"
+    }
 
-    # アップロードしたデータを読み込む
+    # input uploaded data
     func_kintone_dataInput
-    Wait "1s"
 
-    # よくわからない動作その２
-    func_kintone_funcNo2
+    # comfirm result
+    func_kintone_resultComfirm
 
-
-    # よくわからない動作その３
-    func_kintone_funcNo3
+    # check status of importing csv file
+    func_kintone_checkimport
 }

@@ -14,17 +14,8 @@ Procedure image {
 
 # Procedure definition.
 # Expected Parameters are:
-# {1} ... Image
-# {2} ... waittime
-Procedure func_image_complete {
-    for (; 0 == 0; ) {
-        Compareto "{1}" method="search2"
-        Waitfor "match" method="search2" template="{1}" timeout="{2}"
-        if({_EXIT_CODE} == 0){
-            break
-        }
-    }
+# {1} ... image file
+Procedure func_image_click {
+    Waitfor "match" passrate="90" method="search2" template="{1}"
+    Click "image" passrate="90" template="{1}"
 }
-
-
-

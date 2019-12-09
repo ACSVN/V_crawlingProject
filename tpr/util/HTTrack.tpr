@@ -1,3 +1,10 @@
+#
+# util script for using "HTTrack"
+# @author Akira Nose (ADDIX VIETNAM Co., Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
+
 Include "..\func\image.tpr"
 
 # Procedure definition.
@@ -13,16 +20,20 @@ Procedure func_HTTrack_open {
 # {1} ... textfile to use in HTTrack
 # {2} ... waittime
 Procedure func_HTTrack_setting {
-    Press "Ctrl+N" wait="{2}"
-    Paste "{web_site}" wait="{2}"
+    # start httrack
+    Press "Alt+N" wait="{2}"
+
+    # set folder or something
+    Paste "{web}" wait="{2}"
     Press "Tab" wait="{2}" count="2"
     Paste "C:\HTTrackLog" wait="{2}"
-    Press "Tab" wait="{2}" count="2"
-    Press "Ctrl+N" wait="{2}"
-    Press "Tab" wait="{2}"
-    Press "Left" wait="{2}" count="6"
-    Press "Tab" wait="{2}" count="2"
+    Press "Alt+N" wait="{2}"
+
+    # set URL list
+    Press "Tab" wait="{2}" count="3"
     Paste "{1}" wait="{2}"
+
+    # Preferences and mirror options (Set Option)
     Press "Tab" wait="{2}" count="2"
     Press "Enter"
     Press "Shift+Tab"
@@ -31,15 +42,11 @@ Procedure func_HTTrack_setting {
     Paste "+*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar" wait="{2}"
     Press "Tab" wait="{2}" count="3"
     Press "Enter"
-    Press "Tab" wait="{2}" count="2"
-    Press "Enter"
+
+    # go to next page
+    Press "Alt+N"
+
+    # completed
     Press "Shift+Tab" count="3"
     Press "Enter"
-}
-
-
-# Procedure definition.
-Procedure func_HTTrack_waiting {
-    func_image_complete "HTTrack\complete" "1h"
-    Wait "3s"
 }

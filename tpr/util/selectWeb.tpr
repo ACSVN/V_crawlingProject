@@ -1,6 +1,14 @@
-# Procedure definition.
-Procedure func_selectWeb {
+#
+# console script for choosing website
+# @author Akira Nose (ADDIX VIETNAM Co., Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
 
+# Procedure definition.
+# This source code uses java program in tpr file.
+# So dont create any class or method.
+Procedure func_selectWeb {
     java {
         import java.awt.Dimension;
         import javax.swing.BoxLayout;
@@ -20,8 +28,8 @@ Procedure func_selectWeb {
         combo1.setPreferredSize(new Dimension(80, 30));
         mainPanel.add(combo1);
 
-        int clicknum = -1;
         String br = System.getProperty("line.separator");
+        int clicknum = -1;
 
         while (clicknum != 0) {
             int result = JOptionPane.showConfirmDialog(null, mainPanel, "Webクローラ動作設定", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -36,5 +44,4 @@ Procedure func_selectWeb {
             }
         }
     } endjava
-
 }

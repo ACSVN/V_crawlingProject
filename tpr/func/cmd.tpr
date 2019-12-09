@@ -1,3 +1,10 @@
+#
+# function script for using command line
+# @author Akira Nose (ADDIX VIETNAM Co.,Ltd)
+# @version 2.0.0
+# @date 2019.11.20
+#
+
 # Procedure definition.
 Procedure func_cmd_open {
     Press "Windows+R" wait="2s"

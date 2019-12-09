@@ -1,4 +1,1 @@
-Press "Windows+R"
-Paste "{_PROJECT_DIR}\tmp_files\test-VP2\start.bat"
-Press "Enter"
-Wait 1m
+Waitfor "match" method="search2" template="C:\Users\ACS-NOSE\Pictures\01.png"

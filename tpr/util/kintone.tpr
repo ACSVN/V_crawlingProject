@@ -3,46 +3,23 @@ Include "..\func\image.tpr"
 
 # Procedure definition.
 # Expected parameters are:
-# {1} ... mail_address
+# {1} ... mail address
 # {2} ... password
 Procedure func_kintone_login {
-    Compareto "kintone\chrometab" method="search2"
-    if ({_EXIT_CODE} == 0) {
-        Click "image" passrate="100" template="kintone\chrometab"
-        Click "image" passrate="80" template="kintone\loginname" wait="0.5s"
-        Paste "{1}" wait="0.5s"
-        Press "tab" wait="0.5s"
-        Paste "{2}"
-        Press "Enter"
-    }
+    Waitfor "match" method="search2" template="kintone\01-login"
+    Click "image" passrate="90" template="kintone\01-login"
+    Paste "{1}"
+    Press "Tab"
+    Paste "{2}"
+    Press "Enter"
 }
 
 
-# Prodcedure definition.
-Procedure func_kintone_accessCheck {
-    for (i=1; {i}<100 ; i={i}+1) {
-        Compareto "kintone\readagain" method="search2"
+Procedure func_kintone_clickCustomerList {
+    for ( ; 0==0 ; ) {
+        # もはや意味がわからない（該当画像なし）
+        Compareto "https://vp-rpa.cybozu.com/k/11/" method="search2"
         if ({_EXIT_CODE} > 0) {
-            break
-        }
-    }
-}
-
-
-# Procedure definition.
-Procedure func_kintone_charset {
-    Compareto "kintone\char_code" method="search2"
-    if ({_EXIT_CODE} == 0) {
-        Click "image" template="kintone\char_code"
-        Click "image" template="kintone\char_code_utf-8"
-    }
-    for (j=1; {j}<11; j={j}+1) {
-        Compareto "houzin" method="search2"
-        if ({_EXIT_CODE} > 0) {
-            Mouse wheeldown count=3 wait=1s
-        } else {
-            Mouse click to=x:{_COMPARETO_CLICK_X},y:{_COMPARETO_CLICK_Y}
-            Var found=1
             break
         }
     }
@@ -52,12 +29,12 @@ Procedure func_kintone_charset {
 # Procedure definition.
 Procedure func_kintone_selectYes {
     for ( ; 0==0 ; ) {
-        Compareto "kintone\field_or_not-y" passrate="90" method="search2"
+        Compareto "kintone\05-yes_no_img\0" passrate="90" method="search2"
         if ({_EXIT_CODE} == 0) {
-            Click "image" template="kintone\field_or_not-y"
+            Click "image" template="kintone\05-yes_no_img\0"
             break
         } else {
-            Compareto "kintone\y_or_n-y" passrate="90" method="search2"
+            Compareto "kintone\05-yes_no_img\1" passrate="90" method="search2"
             if ({_EXIT_CODE} == 0) {
                 break
             }
@@ -66,51 +43,57 @@ Procedure func_kintone_selectYes {
 }
 
 
+# Procedure definition.
+Procedure func_kintone_charset {
+    Waitfor "match" method="search2" template="Kintone\06-charset\0"
+    Click "image" template="Kintone\06-charset\0"
+    Click "image" template="Kintone\06-charset\1"
+    
+    for (j=1; {j}<11; j={j}+1) {
+        Compareto "Kintone\06-charset\2" method="search2"
+        if ({_EXIT_CODE} > 0) {
+            Mouse wheeldown count=3 wait=1s
+        } else {
+            Click "image" template="Kintone\06-charset\2"
+            break
+        }
+    }
+}
+
+
+# Procedure definition.
 Procedure func_kintone_dataInput {
     for (j=1; {j}<11; j={j}+1) {
-        Compareto "kintone\input_button" method="search2"
+        Compareto "kintone\08-inputdata" method="search2"
         if ({_EXIT_CODE} > 0) {
             Mouse wheelup count="2" wait="1s"
         } else {
-            Click "image" template="kintone\input_button"
+            Click "image" template="kintone\08-inputdata"
             break
         }
-    }
-}
-
-Procedure func_kintone_clickCustomerList {
-    for ( ; 0==0 ; ) {
-        Compareto "https://vp-rpa.cybozu.com/k/11/" method="search2"
-        if ({_EXIT_CODE} > 0) {
-            break
-        }
-    }
-}
-
-Procedure func_kintone_funcNo1 {
-    for (i=0; {i}<10; i={i}+1) {
-        Compareto "kintone\2_qt" method="search2"
-        if ({_EXIT_CODE} > 0) {
-            break
-        }
-    }
-}
-
-Procedure func_kintone_funcNo2 {
-    Compareto "kintone\result_mes" method="search2"
-    if ({_EXIT_CODE} == 0) {
-        Click "image" template="kintone\result_ok_button"
     }
     Wait "1s"
 }
 
-Procedure func_kintone_funcNo3 {
-    Compareto "kintone\continue_mes" method="search2"
+
+# Procedure definition.
+Procedure func_kintone_resultComfirm {
+    Compareto "kintone\09-result\0" method="search2"
+    if ({_EXIT_CODE} == 0) {
+        Click "image" template="kintone\09-result\1"
+    }
+    Wait "1s"
+}
+
+
+# Procedure definition.
+Procedure func_kintone_checkImport {
+    Compareto "kintone\10-import\0" method="search2"
     if ({_EXIT_CODE} == 1) {
-        Compareto "kintone\finish_mes" method="search2"
+        Compareto "kintone\10-import\1" method="search2"
     }
     if ({_EXIT_CODE} == 0) {
-        Wait 5s
+        Wait "5s"
         Press "Alt+F4"
     }
 }

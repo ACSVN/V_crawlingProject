@@ -1,32 +1,28 @@
+#
+# main script for executing "HTTrack"
+# @author Akira Nose (ADDIX VIETNAM Co., Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
+
 Include "..\util\HTTrack.tpr"
+Include "..\func\image.tpr"
 
 
 # Procedure definition.
 Procedure main_HTTrack {
 
-    # "worktime.txt"を作成するための変数
-    Var _CURDATE_FORMAT="yyMMddHHmm"
-    Var _CURDATE_FORMAT="yyyy-MM-dd"
-    Var timeA="{_CURDATE}"
-    Var _CURDATE_FORMAT="HH:mm:ss"
-    Var timeB="{_CURDATE}"
-    Var maketime="{timeA}T{timeB}+09:00"
+   # Open HTTrack
+   func_HTTrack_open
 
-    # "worktime.txt"を作成
-    Exec "cmd.exe /C echo {maketime} > {_PROJECT_DIR}\result\worktime.txt"
+   # Edit setting and Execute
+   func_HTTrack_setting "{_PROJECT_DIR}\results\hreflist.txt" "0.5s"
 
-    # HTTrackを開く
-    func_HTTrack_open
+   # Wait for completion of saving page source
+   Waitfor "match" method="search2" template="HTTrack\01-complete"
+   Wait "3s"
 
-    # 何かをクリック
-    Click "image" timeout="5m" template="HTTrack\top"
-
-    # HTTrackの設定と実行
-    func_HTTrack_setting "{_PROJECT_DIR}\result\hreflist.txt" "0.5s"
-
-    # HTTrackの終了までひたすら待機
-    func_HTTrack_waiting
-
-    # たぶんHTTrackを閉じるやつ
-    Click "image" template="HTTrack\HTTrackComplete" wait="3s"
+   # Close HTTrack
+   func_image_click "HTTrack\close" "3s"
+   Wait "3s"
 }

@@ -1,27 +1,27 @@
+#
+# main script for this project
+# @author Akira Nose (ADDIX VIETNAM Co.,Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
+
 Include "main\main_webcrawl.tpr"
 Include "main\main_HTTrack.tpr"
 Include "main\main_S3upload.tpr"
-Include "main\main_HBinput.tpr"
 Include "main\main_kintone.tpr"
 
-# コンソールで使用される変数
+# variables used in console ofthis project
 Var web=""
-Var new_or_all=""
-Var capture=""
-Var kintone_upload=""
 Var option_btn=""
 
-# サイト選択＆ウェブクローリング
+# select website and run Web-Crawler
 main_webcrawl
 
-# HTTrack
+# save page source by using "HTTrack"
 main_HTTrack
 
-# S3アップロード
+# upload for "Amazon S3"
 main_S3upload
-//
-//# HBインプット
-//main_HBinput
-//
-//# Kintoneアップロード
-//main_kintone
+
+# upload csv file for "Kintone"
+main_kintone
