@@ -31,8 +31,8 @@ Procedure main_webcrawl {
     Paste "N"
     Press "Enter"
 
-    # Check whether web-crawling completed (ミスマッチでコマンドが消えるのを待つ）
-    Waitfor "mismatch" template="WebCrawl\01-complete"
+    # Check whether web-crawling completed
+    func_image_mismatch "webcrawl\01-complete"
 
     # After finish
     Press "Enter" wait="3s"

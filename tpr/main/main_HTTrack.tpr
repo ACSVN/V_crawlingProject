@@ -8,7 +8,6 @@
 Include "..\util\HTTrack.tpr"
 Include "..\func\image.tpr"
 
-
 # Procedure definition.
 Procedure main_HTTrack {
 
@@ -16,13 +15,13 @@ Procedure main_HTTrack {
    func_HTTrack_open
 
    # Edit setting and Execute
-   func_HTTrack_setting "{_PROJECT_DIR}\results\hreflist.txt" "0.5s"
+   func_HTTrack_setting "{_PROJECT_DIR}\results\hreflist.txt" "1s"
 
    # Wait for completion of saving page source
-   Waitfor "match" method="search2" template="HTTrack\01-complete"
+   func_image_match "HTTrack\01-complete" "1m"
    Wait "3s"
 
    # Close HTTrack
-   func_image_click "HTTrack\close" "3s"
+   func_image_click "HTTrack\02-close" "3s"
    Wait "3s"
 }

@@ -1,0 +1,34 @@
+//made by kodama 190903
+//このスクリプトは、AWS S3に接続するための動作の自動化を目的としています。
+//コマンドプロンプト上でのAWS CLIの使用を前提とします。（sync命令動作監視のため）
+//予め実行環境でインストール・各種設定をすること。
+//また、AWS S3にアクセスするためのAccessKey等の情報についても、予め「aws configure」で
+//設定されているものとします。
+
+#
+# main script for uploading amazon s3
+# @author AKira Nose (ADDIX VIETNAM Co., Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
+
+Include "..\func\cmd.tpr"
+Include "..\func\image.tpr"
+
+# Procedure definition.
+Procedure main_awsS3 {
+
+    # open command line
+    func_cmd_open
+
+    # amazon s3 sync
+    func_cmd_operate "aws s3 sync C:\HTTrackLog\{web} s3://vp-web-crawl/{web}"
+    Press "Enter" wait="3s"
+
+    # wait for complete
+    func_image_mismatch "awsS3\01-sync_wait" "1m"
+    Wait "3s"
+
+    # close command line
+    func_cmd_operate "exit"
+}

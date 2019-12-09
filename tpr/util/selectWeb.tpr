@@ -23,7 +23,7 @@ Procedure func_selectWeb {
         JLabel label = new JLabel("取得するWebサイトを選択");
         mainPanel.add(label);
 
-        String[] selectSite = {"Doda", "mynavi", "rikunabi"};
+        String[] selectSite = {"doda", "mynavi", "rikunabi"};
         JComboBox<String> combo1 = new JComboBox<>(selectSite);
         combo1.setPreferredSize(new Dimension(80, 30));
         mainPanel.add(combo1);

@@ -1,16 +1,16 @@
 #
 # main script for this project
-# @author Akira Nose (ADDIX VIETNAM Co.,Ltd)
+# @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
 # @date 2019.12.09
 #
 
 Include "main\main_webcrawl.tpr"
 Include "main\main_HTTrack.tpr"
-Include "main\main_S3upload.tpr"
+Include "main\main_awsS3.tpr"
 Include "main\main_kintone.tpr"
 
-# variables used in console ofthis project
+# variables used in console of this project
 Var web=""
 Var option_btn=""
 
@@ -21,7 +21,7 @@ main_webcrawl
 main_HTTrack
 
 # upload for "Amazon S3"
-main_S3upload
+main_awsS3
 
 # upload csv file for "Kintone"
 main_kintone

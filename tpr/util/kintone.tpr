@@ -1,3 +1,10 @@
+#
+# util script for using "kintone"
+# @author Akira Nose (ADDIX VIETNAM Co., Ltd)
+# @version 2.0.0
+# @date 2019.12.09
+#
+
 Include "..\func\chrome.tpr"
 Include "..\func\image.tpr"
 
@@ -6,8 +13,7 @@ Include "..\func\image.tpr"
 # {1} ... mail address
 # {2} ... password
 Procedure func_kintone_login {
-    Waitfor "match" method="search2" template="kintone\01-login"
-    Click "image" passrate="90" template="kintone\01-login"
+    func_image_click "kintone\01-login" "3s"
     Paste "{1}"
     Press "Tab"
     Paste "{2}"
@@ -15,85 +21,23 @@ Procedure func_kintone_login {
 }
 
 
-Procedure func_kintone_clickCustomerList {
-    for ( ; 0==0 ; ) {
-        # もはや意味がわからない（該当画像なし）
-        Compareto "https://vp-rpa.cybozu.com/k/11/" method="search2"
-        if ({_EXIT_CODE} > 0) {
-            break
-        }
+Procedure func_kintone_upload_setting {
+    for (i=0; {i}<4; i={i}+1) {
+        func_image_click "kintone\02-upload_setting\{i}" "3s"
     }
-}
-
-
-# Procedure definition.
-Procedure func_kintone_selectYes {
-    for ( ; 0==0 ; ) {
-        Compareto "kintone\05-yes_no_img\0" passrate="90" method="search2"
-        if ({_EXIT_CODE} == 0) {
-            Click "image" template="kintone\05-yes_no_img\0"
-            break
-        } else {
-            Compareto "kintone\05-yes_no_img\1" passrate="90" method="search2"
-            if ({_EXIT_CODE} == 0) {
-                break
-            }
-        }
-    }
-}
-
-
-# Procedure definition.
-Procedure func_kintone_charset {
-    Waitfor "match" method="search2" template="Kintone\06-charset\0"
-    Click "image" template="Kintone\06-charset\0"
-    Click "image" template="Kintone\06-charset\1"
+    Paste "{_PROJECT_DIR}\results\branch.csv" wait="1s"
+    Press "Alt+O"
     
-    for (j=1; {j}<11; j={j}+1) {
-        Compareto "Kintone\06-charset\2" method="search2"
-        if ({_EXIT_CODE} > 0) {
-            Mouse wheeldown count=3 wait=1s
-        } else {
-            Click "image" template="Kintone\06-charset\2"
-            break
-        }
-    }
+    # charset check
+    func_image_match "kintone\02-upload_setting\4" "3s"
+    
+    func_image_click "kintone\02-upload_setting\5" "3s"
+    func_image_click "kintone\02-upload_setting\6" "3s"
 }
 
 
 # Procedure definition.
-Procedure func_kintone_dataInput {
-    for (j=1; {j}<11; j={j}+1) {
-        Compareto "kintone\08-inputdata" method="search2"
-        if ({_EXIT_CODE} > 0) {
-            Mouse wheelup count="2" wait="1s"
-        } else {
-            Click "image" template="kintone\08-inputdata"
-            break
-        }
-    }
-    Wait "1s"
-}
-
-
-# Procedure definition.
-Procedure func_kintone_resultComfirm {
-    Compareto "kintone\09-result\0" method="search2"
-    if ({_EXIT_CODE} == 0) {
-        Click "image" template="kintone\09-result\1"
-    }
-    Wait "1s"
-}
-
-
-# Procedure definition.
-Procedure func_kintone_checkImport {
-    Compareto "kintone\10-import\0" method="search2"
-    if ({_EXIT_CODE} == 1) {
-        Compareto "kintone\10-import\1" method="search2"
-    }
-    if ({_EXIT_CODE} == 0) {
-        Wait "5s"
-        Press "Alt+F4"
-    }
+Procedure func_kintone_check_complete {
+    func_image_match "kintone\03-check_complete"
+    Press "Alt+F4"
 }

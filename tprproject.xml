@@ -11,6 +11,6 @@
 <sotype2>classes</sotype2>
 </paths>
 <tver>5.0.5-20190816.1</tver>
-<lastmod>09-12-19 11:01</lastmod>
-<editors>tpr\util\kintone.tpr;tpr\main.tpr;tpr\func\image.tpr;tpr\test.tpr;tpr\main\main_kintone.tpr</editors>
+<lastmod>09-12-19 16:55</lastmod>
+<editors>tpr\main.tpr</editors>
 </tprproject>
