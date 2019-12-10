@@ -2,7 +2,7 @@
 # console script for choosing website
 # @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
-# @date 2019.12.09
+# @date 2019.12.10
 #
 
 # Procedure definition.
@@ -17,30 +17,70 @@ Procedure func_selectWeb {
         import javax.swing.JComboBox;
         import javax.swing.JOptionPane;
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        class MyPanel {
+            private JPanel panel;
+            private JLabel label;
+            private JComboBox<String> combo;
 
-        JLabel label = new JLabel("取得するWebサイトを選択");
-        mainPanel.add(label);
+            MyPanel(String message, String[] option) {
+                panel = new JPanel();
+                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        String[] selectSite = {"doda", "mynavi", "rikunabi"};
-        JComboBox<String> combo1 = new JComboBox<>(selectSite);
-        combo1.setPreferredSize(new Dimension(80, 30));
-        mainPanel.add(combo1);
+                label = new JLabel(message);
+                panel.add(label);
+
+                combo = new JComboBox<>(option);
+                combo.setPreferredSize(new Dimension(80, 30));
+                panel.add(combo);
+            }
+
+            JPanel getPanel() {
+                return this.panel;
+            }
+
+            JComboBox getCombo() {
+                return this.combo;
+            }
+        }
+
+        String[] web_option = {"doda", "mynavi", "rikunabi"};
+        String[] new_option = {"新着のみ取得", "全件取得"};
+
+        MyPanel webPanel = new MyPanel("取得するWebサイトを選択", web_option);
+        MyPanel newPanel = new MyPanel("新着指定の選択", new_option);
 
         String br = System.getProperty("line.separator");
         int clicknum = -1;
 
-        while (clicknum != 0) {
-            int result = JOptionPane.showConfirmDialog(null, mainPanel, "Webクローラ動作設定", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-            if (result == JOptionPane.OK_OPTION) {
-                clicknum = JOptionPane.showConfirmDialog(null, "対象サイト:"+(String)combo1.getSelectedItem()+br+"で実行しますか？","入力確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                getContext().setVariable("option_btn", 0);
-                getContext().setVariable("web", (String)combo1.getSelectedItem());
+
+        while (true) {
+            // ウェブサイトの選択
+            int op1 = JOptionPane.showConfirmDialog(null, webPanel.getPanel(), "Webクローラ動作設定", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (op1 == JOptionPane.OK_OPTION) {
+                // 新着指定の選択
+                int op2 = JOptionPane.showConfirmDialog(null, newPanel.getPanel(), "Webクローラ動作設定", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                if (op2 == JOptionPane.OK_OPTION) {
+                    // 最終確認
+                    String web = webPanel.getCombo().getSelectedItem().toString();
+                    String new_all = newPanel.getCombo().getSelectedItem().toString();
+                    String message = "対象サイト: " + web + br + "新着指定: " + new_all + br + "で実行しますか？";
+                    int op3 = JOptionPane.showConfirmDialog(null, message,"入力確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (op3 == JOptionPane.YES_OPTION) {
+                        switch (new_all) {
+                            case "新着のみ取得":
+                                new_all = "new";
+                                break;
+                            case "全件取得":
+                                new_all = "all";
+                                break;
+                        }
+                        getContext().setVariable("web", web);
+                        getContext().setVariable("new_all", new_all);
+                        break;
+                    }
+                }
             } else {
-                getContext().setVariable("option_btn", 1);
-                getContext().setVariable("web", "");
-                clicknum = 0;
+                break;
             }
         }
     } endjava

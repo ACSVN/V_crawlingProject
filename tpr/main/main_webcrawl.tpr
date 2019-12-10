@@ -2,7 +2,7 @@
 # main script for executing "vp-2.0.0.jar" to get all job info
 # @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
-# @date 2019.12.09
+# @date 2019.12.10
 #
 
 Include "..\util\selectWeb.tpr"
@@ -11,8 +11,16 @@ Include "..\func\image.tpr"
 # Procedure definition.
 Procedure main_webcrawl {
 
+    # variables used in console of this project
+    Var web=""
+    Var new_all=""
+
     # Select website by using console
     func_selectWeb
+
+    if ({web} == "") {
+        Exit 0
+    }
 
     # web-crawling by using jar file (filename = \jar\vp-2.0.0.jar)
     Press "Windows+R"
@@ -21,6 +29,10 @@ Procedure main_webcrawl {
 
     # input website name (*auto)
     Paste "{web}"
+    Press "Enter" wait="1s"
+
+    # input new or all (*auto)
+    Paste "{new_all}"
     Press "Enter" wait="1s"
 
     # select whether set directory on manual (*auto)
@@ -32,7 +44,7 @@ Procedure main_webcrawl {
     Press "Enter"
 
     # Check whether web-crawling completed
-    func_image_mismatch "webcrawl\01-complete"
+    func_image_mismatch "webcrawl\01-complete" "1m"
 
     # After finish
     Press "Enter" wait="3s"

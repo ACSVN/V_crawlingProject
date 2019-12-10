@@ -10,10 +10,6 @@ Include "main\main_HTTrack.tpr"
 Include "main\main_awsS3.tpr"
 Include "main\main_kintone.tpr"
 
-# variables used in console of this project
-Var web=""
-Var option_btn=""
-
 # select website and run Web-Crawler
 main_webcrawl
 
