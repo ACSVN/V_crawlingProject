@@ -2,7 +2,7 @@
 # console script for choosing website
 # @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
-# @date 2019.12.10
+# @date 2019.12.20
 #
 
 # Procedure definition.
@@ -43,15 +43,15 @@ Procedure func_selectWeb {
             }
         }
 
-        String[] web_option = {"doda", "mynavi", "rikunabi"};
-        String[] new_option = {"新着のみ取得", "全件取得"};
+        String[] web_option_en = {"doda", "mynavi", "rikunabi", "en-japan", "woman-type", "type", "ecareer"};
+        String[] web_option_jp = {"Doda", "マイナビ転職", "リクナビNEXT", "エン転職", "女の転職", "Type", "イーキャリア"};
+        String[] new_option_en = {"new", "all"};
+        String[] new_option_jp = {"新着のみ取得", "全件取得"};
 
-        MyPanel webPanel = new MyPanel("取得するWebサイトを選択", web_option);
-        MyPanel newPanel = new MyPanel("新着指定の選択", new_option);
+        MyPanel webPanel = new MyPanel("取得するWebサイトを選択", web_option_jp);
+        MyPanel newPanel = new MyPanel("新着指定の選択", new_option_jp);
 
         String br = System.getProperty("line.separator");
-        int clicknum = -1;
-
 
         while (true) {
             // ウェブサイトの選択
@@ -66,13 +66,16 @@ Procedure func_selectWeb {
                     String message = "対象サイト: " + web + br + "新着指定: " + new_all + br + "で実行しますか？";
                     int op3 = JOptionPane.showConfirmDialog(null, message,"入力確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                     if (op3 == JOptionPane.YES_OPTION) {
-                        switch (new_all) {
-                            case "新着のみ取得":
-                                new_all = "new";
-                                break;
-                            case "全件取得":
-                                new_all = "all";
-                                break;
+                        // java受け渡し用に日本語から英語へデータの書き換え
+                        for (int i = 0; i < web_option_jp.length; i++) {
+                            if (web.equals(web_option_jp[i])) {
+                                web = web_option_en[i];
+                            }
+                        }
+                        for (int i = 0; i < new_option_jp.length; i++) {
+                            if (new_all.equals(new_option_jp[i])) {
+                                new_all = new_option_en[i];
+                            }
                         }
                         getContext().setVariable("web", web);
                         getContext().setVariable("new_all", new_all);

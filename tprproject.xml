@@ -11,6 +11,6 @@
 <sotype2>classes</sotype2>
 </paths>
 <tver>5.0.5-20190816.1</tver>
-<lastmod>10-12-19 15:26</lastmod>
-<editors>tpr\util\selectWeb.tpr;tpr\main.tpr;tpr\main\main_webcrawl.tpr</editors>
+<lastmod>20-12-19 13:39</lastmod>
+<editors>tpr\main.tpr</editors>
 </tprproject>

@@ -46,6 +46,6 @@ Procedure main_webcrawl {
     # Check whether web-crawling completed
     func_image_mismatch "webcrawl\01-complete" "1m"
 
-    # After finish
-    Press "Enter" wait="3s"
+//    # After finish
+//    Press "Enter" wait="3s"
 }
