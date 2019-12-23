@@ -1,11 +1,11 @@
 #
-# util script for using "HTTrack"
+# main script for executing "HTTrack"
 # @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
-# @date 2019.12.09
+# @date 2019.12.23
 #
 
-Include "..\func\image.tpr"
+Include "..\func\Image.tpr"
 
 # Procedure definition.
 Procedure func_HTTrack_open {
@@ -13,7 +13,6 @@ Procedure func_HTTrack_open {
     Paste "C:\Program Files\WinHTTrack\WinHTTrack.exe"
     Press "Enter" wait="3s"
 }
-
 
 # Procedure definition.
 # Excepted parameters are:
@@ -49,4 +48,22 @@ Procedure func_HTTrack_setting {
     # completed
     Press "Shift+Tab" count="3"
     Press "Enter"
+}
+
+# Procedure definition.
+Procedure main_HTTrack {
+
+   # Open HTTrack
+   func_HTTrack_open
+
+   # Edit setting and Execute
+   func_HTTrack_setting "{_PROJECT_DIR}\results\hreflist.txt" "1s"
+
+   # Wait for completion of saving page source
+   func_image_match "HTTrack\01-complete" "1m"
+   Wait "3s"
+
+   # Close HTTrack
+   func_image_click "HTTrack\02-close" "3s"
+   Wait "3s"
 }

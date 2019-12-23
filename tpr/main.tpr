@@ -2,22 +2,30 @@
 # main script for this project
 # @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
-# @date 2019.12.09
+# @date 2019.12.23
 #
 
-Include "main\main_webcrawl.tpr"
-Include "main\main_HTTrack.tpr"
-Include "main\main_awsS3.tpr"
-Include "main\main_kintone.tpr"
+Include "util\1_WebCrawl.tpr"
+Include "util\2_Kintone.tpr"
+Include "util\3_HTTrack.tpr"
+Include "util\4_Capture.tpr"
+Include "util\5_AwsS3.tpr"
+
+Var web=""
+Var new_all=""
 
 # select website and run Web-Crawler
 main_webcrawl
 
-# save page source by using "HTTrack"
-main_HTTrack
-
-# upload for "Amazon S3"
-main_awsS3
-
 # upload csv file for "Kintone"
 main_kintone
+
+# save page source by using "HTTrack"
+if ({web} == "rikunabi") {
+    main_capture
+} else {
+    main_HTTrack
+}
+
+# upload for "Aws S3"
+main_awsS3
