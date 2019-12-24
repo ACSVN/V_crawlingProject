@@ -1,0 +1,21 @@
+# Expected parameters are:
+# {1} ... filename
+Procedure func_java_check {
+    Exec "cmd.exe /C mkdir {_PROJECT_DIR}\tmp"
+    for (i=0; {i}<50; i={i}+1) {
+        // コピー可能性の判定により画像判定を代替するものに
+        Exec "cmd.exe /C copy {_PROJECT_DIR}\{1} {_PROJECT_DIR}\tmp\test.txt"
+        if ({_EXIT_CODE} == 0) {
+            Exec "cmd.exe /C del {_PROJECT_DIR}\tmp\test.txt"
+            Exec "cmd.exe /C rmdir {_PROJECT_DIR}\tmp"
+            Log "File Found."
+            break
+        } else {
+            Wait "1s"
+            Log "error count: {i}"
+            continue
+        }
+    }
+}
+
+func_java_check "results\hreflis.txt"

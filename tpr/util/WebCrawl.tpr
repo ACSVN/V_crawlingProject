@@ -8,6 +8,10 @@
 Include "..\func\SelectWeb.tpr"
 Include "..\func\Image.tpr"
 
+Procedure func_java_check {
+    
+}
+
 # Procedure definition.
 Procedure main_webcrawl {
 
@@ -40,5 +44,6 @@ Procedure main_webcrawl {
     Press "Enter"
 
     # Check whether web-crawling completed
-    func_image_mismatch "webcrawl\01-complete" "1m"
+//    func_java_check "results\hreflist.txt"
+//    func_image_mismatch "webcrawl\01-complete" "1m"
 }

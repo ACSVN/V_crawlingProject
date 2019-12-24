@@ -51,7 +51,7 @@ Procedure func_HTTrack_setting {
 }
 
 # Procedure definition.
-Procedure main_HTTrack {
+Procedure main_HTTrack_start {
 
    # Open HTTrack
    func_HTTrack_open
@@ -59,7 +59,18 @@ Procedure main_HTTrack {
    # Edit setting and Execute
    func_HTTrack_setting "{_PROJECT_DIR}\results\hreflist.txt" "1s"
 
-   # Wait for completion of saving page source
+//   # Wait for completion of saving page source
+//   func_image_match "HTTrack\01-complete" "1m"
+//   Wait "3s"
+//
+//   # Close HTTrack
+//   func_image_click "HTTrack\02-close" "3s"
+//   Wait "3s"
+}
+
+# Procedure definition.
+Procedure main_HTTrack_finish {
+    # Wait for completion of saving page source
    func_image_match "HTTrack\01-complete" "1m"
    Wait "3s"
 

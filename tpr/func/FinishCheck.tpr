@@ -1,0 +1,16 @@
+# Expected parameters are:
+# {1} ... filename
+Procedure func_java_check {
+    for (; 0==0 ;) {
+        # ファイルコピーができるかどうかの判定により画像判定を代替するものにする
+        Exec "cmd.exe /C copy {_PROJECT_DIR}\results\{1} {_PROJECT_DIR}\tmp\{1}"
+        if ({_EXIT_CODE} == 0) {
+            Exec "cmd.exe /C del {_PROJECT_DIR}\tmp\{1}"
+            Log "File Found. (File Name = {1})"
+            break
+        } else {
+            Wait "1s"
+            continue
+        }
+    }
+}

@@ -25,7 +25,7 @@ Procedure func_kintone_upload_setting {
     for (i=0; {i}<4; i={i}+1) {
         func_image_click "kintone\02-upload_setting\{i}" "3s"
     }
-    Paste "{_PROJECT_DIR}\results\branch.csv" wait="1s"
+    Paste "{_PROJECT_DIR}\results\upload.csv" wait="1s"
     Press "Alt+O"
     
     # charset check
