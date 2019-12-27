@@ -1,61 +1,53 @@
 #
-# script for taking picture on Google Chrome
+# main script for taking capture on Google Chrome
 # @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
-# @date 2019.12.23
+# @date 2019.12.27
 #
 
-Include "..\func\Chrome.tpr"
 Include "..\func\Image.tpr"
 
 Procedure main_capture {
-    
-    # variables used in this script
-    Eval y_coordinate={_DISPLAY_H_1}-100
-    Eval s_x={_DISPLAY_W_1}/2
-    Eval e_x={_DISPLAY_W_1}
-    Eval e_y={_DISPLAY_H_1}/2
-    Eval s_x2={_DISPLAY_W_1}-100
-    Eval s_y2={_DISPLAY_H_1}-100
-    
+    # preparation
+    Exec "cmd.exe /C md {_PROJECT_DIR}\results\capture\{web}"
+
     # open Google Chrome
-    func_chrome_open
+    Exec "cmd.exe /C start chrome.exe" wait="1s"
+    Press "Windows+Up" wait="1s"
     
+    # preparation for input URL
     File "open" file="{_PROJECT_DIR}\results\hreflist.txt" id="hreflist"
 
     for (i=1; {i}<={_FILE_LINE_COUNT}; i={i}+1){
         # read URL
         File "read" line="{i}" column="1" length="1" id="hreflist"
-        
-        # open window
-        Press "Ctrl+T" wait="2s"
-        Paste {_FILE_LINE_TEXT} wait="1s"
-        Press "Enter" wait="2s"
 
-        # take caps
+        # open new window
+        Press "Ctrl+T"
+        Paste {_FILE_LINE_TEXT}
+        Press "Enter" wait="1s"
+
+        # take capture
+        func_image_match "capture\01-chrome_check" "1s"
         Press "Ctrl+Shift+I" wait="5s"
-        Press "Ctrl+Shift+P" wait="3s"
+        Press "Ctrl+Shift+P"
         Paste "full"
-        Press "Enter" wait="3s"
-        
+        Press "Enter"
+
         # download check
-        func_image_match "rikunabi\download2_check"
-//        for (img_cnt=0; {img_cnt}<=80; img_cnt={img_cnt}+1) {
-//            Compareto "rikunabi\download2_check" method="search2" cmparea="x:0,y:{y_coordinate},w:80,h:100"
-//            if ({_EXIT_CODE} == 0) {
-//                break
-//            } else {
-//                Var img_cnt=0
-//            }
-//        }
+        func_image_match "capture\02-download_check" "1s"
 
         # close window
-        Press "Ctrl+W" wait="1s"
-        Click "image" cmparea="x:{s_x2},y:{s_y2},w:100,h:100" template="rikunabi\download3_check"
-        Wait "1s"
+        Press "Ctrl+J"
+        Press "Ctrl+W" count="2" wait="1s"
+        
+        # move png files to result folder
+        Exec "\"{_PROJECT_DIR}\bat\CaptureRen.bat\" \"{web}\""
     }
-    File "close" save="false" id="hreflist"
     
+    # close "hreflist.txt"
+    File "close" save="false" id="hreflist"
+
     # close Google Chrome
-    func_chrome_close
+    Press "Alt+F4" wait="1s"
 }

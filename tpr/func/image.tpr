@@ -1,5 +1,5 @@
 #
-# function script for the part of using image
+# func script for the part of using image
 # @author Akira Nose (ADDIX VIETNAM Co., Ltd)
 # @version 2.0.0
 # @date 2019.12.09
@@ -43,5 +43,5 @@ Procedure func_image_mismatch {
 Procedure func_image_click {
     func_image_match "{1}" "{2}"
     Click "image" passrate="90" template="{1}"
-    Wait "3s"
+    Wait "1s"
 }
